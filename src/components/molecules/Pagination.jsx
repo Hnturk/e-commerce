@@ -1,0 +1,17 @@
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
+export default function PaginationButtons() {
+
+
+  return (
+    <Stack spacing={2}>
+      <Pagination
+        color="primary"
+        count={10}
+        showFirstButton
+        showLastButton
+      />
+    </Stack>
+  );
+}
