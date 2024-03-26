@@ -1,12 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
-
+import api from "../lib/api/api";
 export const CarContext = createContext();
 
 function Provider({ children }) {
   const [data, setData] = useState([]);
-  const [cars, setCars] = useState(data);
+  const [carData, setCarData] = useState(data);
   const [brandData, setBrandData] = useState(data);
   const [modelData, setModelData] = useState(data);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -18,12 +18,10 @@ function Provider({ children }) {
   const [isVisible, setIsVisible] = useState(false);
   const [product, setProduct] = useState([]);
 
-  const fetchCars = async () => {
-    const response = await axios.get(
-      "https://5fc9346b2af77700165ae514.mockapi.io/products"
-    );
+  const fetchData = async () => {
+    const response = await axios.get(api);
     setData(response.data);
-    setCars(response.data);
+    setCarData(response.data);
     setBrandData(response.data);
     setModelData(response.data);
   };
@@ -60,7 +58,7 @@ function Provider({ children }) {
     let newData = data.filter((item) =>
       item.name.toLowerCase().includes(search.toLowerCase().trim())
     );
-    setCars(newData);
+    setCarData(newData);
   }, [search, data]);
 
   useEffect(() => {
@@ -76,7 +74,6 @@ function Provider({ children }) {
     );
     setModelData(newData);
   }, [modelSearch, data]);
-
 
   useEffect(() => {
     const storedCartProducts = localStorage.getItem("cartProducts");
@@ -102,9 +99,9 @@ function Provider({ children }) {
     brandData,
     setBrandData,
     setSearch,
-    cars,
-    setCars,
-    fetchCars,
+    carData,
+    setCarData,
+    fetchData,
     totalPrice,
     setTotalPrice,
     brandSearch,
@@ -123,7 +120,7 @@ function Provider({ children }) {
     setProduct,
     addAndCount,
     getProduct,
-    addToCart
+    addToCart,
   };
 
   return (
