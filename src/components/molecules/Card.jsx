@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,14 +7,19 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions} from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useNavigate } from "react-router-dom";
+import CarContext from '../../contexts/CarContext';
 
-export default function ProductCard() {
+export default function ProductCard({ car }) {
+
+  const { addToCart } = useContext(CarContext);
 
   const navigate = useNavigate();
+
   const [isClicked, setIsClicked] = useState(false);
 
   function handleClick() {
     setIsClicked(!isClicked);    
+    addToCart(car.price, car?.name, car.count, car.id)
   }
 
   function handleToggleClick() {
@@ -22,19 +27,19 @@ export default function ProductCard() {
   }
 
   return (
-    <Card raised={true} sx={{ minWidth: "185px", height: "270px", width:"90%", padding: "10px"}} >
+    <Card raised={true} className='card'>
       <CardActionArea onClick={handleToggleClick}> 
         <CardMedia
           component="img"
           height="120"
-          image="https://media.gcflearnfree.org/ctassets/topics/246/share_flower_fullsize.jpg"
+          image={car?.image}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" color="primary" sx={{fontSize: "clamp(15px, 1.3vw, 22px)"}}>
-            $1200
+            {car?.price}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a wi
+            {car?.name}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -46,7 +51,6 @@ export default function ProductCard() {
           variant={isClicked ? "outlined" : "contained" } 
           fullWidth={true} 
           onClick={handleClick}
-          // disabled={isClicked}
         >
           {isClicked ? (
             <>

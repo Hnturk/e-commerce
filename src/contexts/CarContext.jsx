@@ -17,6 +17,7 @@ function Provider({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [product, setProduct] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
 
   const fetchData = async () => {
     const response = await axios.get(api);
@@ -121,6 +122,8 @@ function Provider({ children }) {
     addAndCount,
     getProduct,
     addToCart,
+    isClicked,
+    setIsClicked,
   };
 
   return (

@@ -3,6 +3,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import FilterBar from "./containerContent/FilterBar";
 import MainContent from "./containerContent/MainContent";
 import ShopBar from "./containerContent/ShopBar";
+import "../../../style/components/molecules/Card-min.css"
 
 function Container() {
   return (
@@ -24,6 +25,7 @@ function Container() {
           alignItems: "center",
           flexDirection: "column",
           padding: 0,
+          gap: "20px"
         }}
         xs={12}
         sm={12}

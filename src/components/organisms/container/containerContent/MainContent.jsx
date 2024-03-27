@@ -1,54 +1,71 @@
-import React from 'react'
-import Card from '../../../../components/molecules/Card'
-import Grid from '@mui/material/Unstable_Grid2'; 
-import PaginationButtons from '../../../molecules/Pagination';
+import { React, useContext, useState } from "react";
+import Card from "../../../../components/molecules/Card";
+import Grid from "@mui/material/Unstable_Grid2";
+import Pagination from "@mui/material/Pagination";
+import CarContext from "../../../../contexts/CarContext";
+import Stack from "@mui/material/Stack";
 
 function MainContent() {
+  const { carData } = useContext(CarContext);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 12;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  function handleChange(newPage) {
+    setCurrentPage(newPage);
+  }
+
+  
   return (
     <>
-    <Grid sx={{width: "100%", height:"100%", margin: 0, padding: 0,marginTop: "12px", display: "flex", justifyContent: "space-evenly"}} container rowGap={1} >
-      <Grid sx={{ minWidth: "185px",  height: "270px", margin: 0, padding: 0, display: "grid", placeItems: "center"}} xs={12} sm={6} md={6} lg={4} xl={3} >
-        <Card />
+      <Grid
+        sx={{
+          width: "100%",
+          maxHeight: "100%",
+          margin: 0,
+          padding: 0,
+          marginTop: "12px",
+          display: "flex",
+          rowGap: "20px"
+        }}
+        container
+      >
+        {carData.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
+          <Grid
+            sx={{
+              minWidth: "185px",
+              height: "260px",
+              margin: 0,
+              padding: 0,
+              display: "grid",
+              placeItems: "center",
+            }}
+            xs={12}
+            sm={6}
+            md={6}
+            lg={4}
+            xl={3}
+          >
+            <Card key={item?.id} car={item} />
+          </Grid>
+        ))}
       </Grid>
-       <Grid  sx={{ minWidth: "185px",  margin: 0, padding: 0, height: "270px", display: "grid", placeItems: "center"}} xs={12} sm={6} md={6} lg={4} xl={3} >
-        <Card />
-      </Grid>
-      <Grid sx={{ minWidth: "185px",  height: "270px", display: "grid", placeItems: "center", margin: 0, padding: 0}} xs={12} sm={6} md={6} lg={4} xl={3} >
-        <Card />
-      </Grid>
-       <Grid  sx={{ minWidth: "185px",  margin: 0, padding: 0, height: "270px", display: "grid", placeItems: "center"}} xs={12} sm={6} md={6} lg={4} xl={3} >
-        <Card />
-      </Grid>
-      <Grid sx={{ minWidth: "185px",  height: "270px", display: "grid", placeItems: "center", margin: 0, padding: 0}} xs={12} sm={6} md={6} lg={4} xl={3} >
-        <Card />
-      </Grid>
-       <Grid  sx={{ minWidth: "185px",  margin: 0, padding: 0, height: "270px", display: "grid", placeItems: "center"}} xs={12} sm={6} md={6} lg={4} xl={3} >
-        <Card />
-      </Grid>
-      <Grid sx={{ minWidth: "185px",  height: "270px", display: "grid", placeItems: "center", margin: 0, padding: 0}} xs={12} sm={6} md={6} lg={4} xl={3} >
-        <Card />
-      </Grid>
-       <Grid  sx={{ minWidth: "185px",  margin: 0, padding: 0, height: "270px", display: "grid", placeItems: "center"}} xs={12} sm={6} md={6} lg={4} xl={3}>
-        <Card />
-      </Grid>
-      <Grid sx={{ minWidth: "185px",  height: "270px", display: "grid", placeItems: "center", margin: 0, padding: 0}} xs={12} sm={6} md={6} lg={4} xl={3}>
-        <Card />
-      </Grid>
-       <Grid  sx={{ minWidth: "185px",  margin: 0, padding: 0, height: "270px", display: "grid", placeItems: "center"}} xs={12} sm={6} md={6} lg={4} xl={3}>
-        <Card />
-      </Grid>
-      <Grid sx={{ minWidth: "185px",  height: "270px", display: "grid", placeItems: "center", margin: 0, padding: 0}} xs={12} sm={6} md={6} lg={4} xl={3}>
-        <Card />
-      </Grid>
-       <Grid  sx={{ minWidth: "185px",  margin: 0, padding: 0, height: "270px", display: "grid", placeItems: "center"}} xs={12} sm={6} md={6} lg={4} xl={3}>
-        <Card />
-      </Grid>
-      
-      
-    </Grid>
-    <PaginationButtons />
+
+      <Stack spacing={2}>
+        <Pagination
+          color="primary"
+          count={Math.ceil(carData?.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handleChange}
+          showFirstButton
+          showLastButton
+        />
+      </Stack>
     </>
-  )
+  );
 }
 
-export default MainContent
+export default MainContent;

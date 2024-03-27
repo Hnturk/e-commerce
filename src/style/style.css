@@ -497,7 +497,7 @@ body {
 } */
 @keyframes spin {
   from {
-    transform: rotate(240deg);
+    transform: rotate(350deg);
   }
   to {
     transform: rotate(360deg);
