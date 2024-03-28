@@ -13,7 +13,7 @@ const options = [
   { label: "Price high to low", value: "highToLow" },
   { label: "Price low to high", value: "lowToHigh" },
 ];
-export default function BrandFilter() {
+export default function SortFilter() {
 
   const { carData, setCarData } = useContext(CarContext)
   const [selectedValue, setSelectedValue] = useState("")

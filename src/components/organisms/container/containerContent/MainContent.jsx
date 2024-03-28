@@ -11,14 +11,16 @@ function MainContent() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const itemsPerPage = 12;
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  function handleChange(newPage) {
-    setCurrentPage(newPage);
+  const currentItems = carData.slice(indexOfFirstItem, indexOfLastItem);
+
+  function handleChange(event, value) {
+    setCurrentPage(value);
   }
 
-  
   return (
     <>
       <Grid
@@ -33,7 +35,7 @@ function MainContent() {
         }}
         container
       >
-        {carData.slice(indexOfFirstItem, indexOfLastItem).map((item) => (
+        {currentItems.map((item) => (
           <Grid
             sx={{
               minWidth: "185px",
@@ -69,3 +71,5 @@ function MainContent() {
 }
 
 export default MainContent;
+
+

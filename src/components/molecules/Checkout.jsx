@@ -21,6 +21,7 @@ function Checkout() {
         }}
       >
         <Button
+          className="button"
           sx={{ minWidth: "200px", width: "90%",  marginTop: "10px" }}
           fullWidth
           variant="contained"

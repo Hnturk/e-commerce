@@ -1,0 +1,72 @@
+.icon {
+    background-image: linear-gradient(
+      to right,
+      #ffffff,
+      rgba(0,212,255,1) 50%,
+      #ffffff 50%
+    );
+    background-size: 200% 100%;
+    background-position: -100%;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    position: relative;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .icon:before {
+    content: '';
+    background: #ffffff;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+  .icon:after {
+    content: '';
+    background:linear-gradient(40deg, #89f7fe 0%, #66a6ff 100%);
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .icon:hover {
+    background-position: 0;
+  }
+
+  .icon:hover::before {
+    width: 30%;
+  }
+
+  .icon:hover::after {
+    width: 70%;
+  }
+
+  .brand {
+    background-image: linear-gradient(
+      to right,
+      #ffffff,
+      rgba(0,212,255,1) 50%,
+      #ffffff 50%
+    );
+    background-size: 200% 100%;
+    background-position: -100%;
+    background-clip: text;
+    padding: 0px 0;
+    position: relative;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .brand:hover {
+    background-position: 0;
+  }

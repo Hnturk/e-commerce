@@ -14,5 +14,6 @@
 }
 
 .card:hover {
-  scale: 1.09;
+  scale: 1.05;
+  transition: scale 0.25s ease;
 }

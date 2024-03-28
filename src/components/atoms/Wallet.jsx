@@ -10,10 +10,11 @@ function Wallet() {
 
   return (
     <Link
+      className="icon"
       sx={{ display: "flex", alignItems: "center", gap: 1 }}
       href="#"
-      underline="hover"
-      color= "white"
+      underline="none"
+      color= "#fff"
     >
       <AccountBalanceWalletOutlinedIcon />
       <Typography variant="h6" color="white">

@@ -35,7 +35,7 @@ export default function ProductCard({ car }) {
           image={car?.image}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" color="primary" sx={{fontSize: "clamp(15px, 1.3vw, 22px)"}}>
+          <Typography gutterBottom variant="h5" component="div" color="primary" sx={{fontSize: "clamp(15px, 1.3vw, 22px)", }}>
             {car?.price}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -45,9 +45,9 @@ export default function ProductCard({ car }) {
       </CardActionArea>
       <CardActions style={{display: "flex", justifyContent: "center", padding: 0}}>
       <Button 
+          className={isClicked ? "" : "button" } 
           sx={{fontSize: "clamp(12px, 0.72vw, 15px)"}}
           size="medium" 
-          color="primary" 
           variant={isClicked ? "outlined" : "contained" } 
           fullWidth={true} 
           onClick={handleClick}

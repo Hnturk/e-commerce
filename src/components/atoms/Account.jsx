@@ -6,10 +6,11 @@ import Typography from "@mui/material/Typography";
 function Account() {
   return (
     <Link
-      sx={{ display: "flex", alignItems: "center", gap: 1 }}
+    className="icon"
+      sx={{ gap: 1, }}
       href="/"
-      underline="hover"
-      color= "white"
+      underline="none"
+      color= "#fff"
     >
       <AccountCircle />
       <Typography variant="h6" color="white">

@@ -5,6 +5,8 @@ import Wallet from "../../atoms/Wallet";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import Link from "@mui/material/Link";
+import "../../../style/components/atoms/SearchBar-min.css"
+import "../../../style/components/atoms/NavbarIcons-min.css"
 function Navbar() {
   return (
     <Grid
@@ -33,8 +35,10 @@ function Navbar() {
         xl={6}
       >
         <Link
+        underline = "none"
         href = "/">
-        <Typography variant="h4" color="white">
+        
+        <Typography className="brand" variant="h4" color="white">
           Eteration
         </Typography>
         </Link>

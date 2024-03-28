@@ -19,13 +19,19 @@ function Provider({ children }) {
   const [product, setProduct] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
 
-  const fetchData = async () => {
-    const response = await axios.get(api);
-    setData(response.data);
-    setCarData(response.data);
-    setBrandData(response.data);
-    setModelData(response.data);
+  const fetchData = () => {
+    axios.get(api)
+      .then(response => response.data)
+      .then(data => {
+        setData(data);
+        setCarData(data);
+        setBrandData(Array.from(new Set(data.map((car) => car.brand))));
+        setModelData(Array.from(new Set(data.map((car) => car.model))));
+      })
+      .catch(error => console.log(error));
   };
+
+
 
   function addAndCount(newCartProduct) {
     const isSameID = cartProducts.some(
@@ -62,19 +68,6 @@ function Provider({ children }) {
     setCarData(newData);
   }, [search, data]);
 
-  useEffect(() => {
-    let newData = data.filter((item) =>
-      item.brand.toLowerCase().includes(brandSearch.toLowerCase().trim())
-    );
-    setBrandData(newData);
-  }, [brandSearch, data]);
-
-  useEffect(() => {
-    let newData = data.filter((item) =>
-      item.model.toLowerCase().includes(modelSearch.toLowerCase().trim())
-    );
-    setModelData(newData);
-  }, [modelSearch, data]);
 
   useEffect(() => {
     const storedCartProducts = localStorage.getItem("cartProducts");

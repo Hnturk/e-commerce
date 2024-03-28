@@ -1,4 +1,4 @@
-import {React, useState, useEffect, useContext} from "react";
+import { useContext, useState, useEffect } from "react";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -8,70 +8,59 @@ import CarContext from "../../contexts/CarContext";
 
 function ModelFilter() {
   const { modelData, setCarData } = useContext(CarContext);
-  const uniqueModels = [...new Set(modelData.map((car) => car.model))];
-  const [filteredModels, setFilteredModels] = useState([]);
-  const [selectedModels, setSelectedModels] = useState([]);
+  const uniqueModels = Array.from(new Set(modelData.map(({ model }) => model)));
   const [search, setSearch] = useState("");
+  const [selectedModels, setSelectedModels] = useState([]);
+
+  useEffect(() => {
+    setSelectedModels([]);
+  }, [modelData]);
+
+  const filteredModels = search
+    ? uniqueModels.filter((model) => model.toLowerCase().includes(search.toLowerCase()))
+    : uniqueModels;
+
+  const filteredData = modelData.filter((car) => selectedModels.includes(car.model));
 
   function handleSelection(model) {
-    setSelectedModels((prev) => 
-    prev.includes(model) ? prev.filter(item => item !== model)
-    : [...prev, model])
-    const filteredData = uniqueModels.filter((item) => item.toLowerCase().includes(selectedModels));
-    setCarData(filteredData);
+    const selected = selectedModels.includes(model)
+      ? selectedModels.filter((item) => item !== model)
+      : [...selectedModels, model];
+    setSelectedModels(selected);
+    setCarData(filteredData.filter((car) => selected.includes(car.model)));
   }
 
   function handleSearch(e) {
-    const model = e.target.value.toLowerCase();
-    setSearch(model);
-
-    if (search === "") {
-      setFilteredModels(uniqueModels);
-    } else {
-      const filteredData = uniqueModels.filter((item) =>
-        item.toLowerCase().includes(search));
-      setFilteredModels(filteredData);
-
-    }
+    setSearch(e.target.value);
   }
 
-  useEffect(() => {
-    setFilteredModels(uniqueModels);
-  }, [modelData]);
-
   return (
-    <Paper
-      elevation={4}
-      sx={{ minWidth: "190px", width: "50%", height: "190px" }}
-    >
+    <Paper elevation={4} sx={{ minWidth: "190px", width: "50%", height: "190px" }}>
       <TextField
         id="outlined-search"
         label="Search Model"
         type="search"
         onChange={handleSearch}
       />
-      <FormGroup
-        row={true}
-        sx={{ marginLeft: 2, overflowY: "auto", maxHeight: 120 }}
-      >
-        {filteredModels.map((model, index) => {
-          return (
-            <FormControlLabel
-              key={index}
-              sx={{ minWidth: "150px" }}
-              control={
-                <Checkbox
-                  onChange={() => handleSelection(model)}
-                  checked={selectedModels.includes(model)}
-                />
-              }
-              label={model}
-            />
-          );
-        })}
+      <FormGroup row sx={{ marginLeft: 2, overflowY: "auto", maxHeight: 120 }}>
+        {filteredModels.map((model, index) => (
+          <FormControlLabel
+            key={index}
+            sx={{ minWidth: "150px" }}
+            control={
+              <Checkbox onChange={() => handleSelection(model)} checked={selectedModels.includes(model)} />
+            }
+            label={model}
+          />
+        ))}
       </FormGroup>
     </Paper>
   );
 }
 
 export default ModelFilter;
+
+
+
+
+
