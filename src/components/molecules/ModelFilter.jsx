@@ -8,31 +8,24 @@ import CarContext from "../../contexts/CarContext";
 
 function ModelFilter() {
   const { modelData, setCarData } = useContext(CarContext);
-  const uniqueModels = Array.from(new Set(modelData.map(({ model }) => model)));
   const [search, setSearch] = useState("");
   const [selectedModels, setSelectedModels] = useState([]);
 
-  useEffect(() => {
-    setSelectedModels([]);
-  }, [modelData]);
+  const filteredModels = useMemo(
+    () =>
+      search
+        ? modelData.filter((model) => model.toLowerCase().includes(search))
+        : modelData,
+    [search, modelData]
+  );
 
-  const filteredModels = search
-    ? uniqueModels.filter((model) => model.toLowerCase().includes(search.toLowerCase()))
-    : uniqueModels;
-
-  const filteredData = modelData.filter((car) => selectedModels.includes(car.model));
-
-  function handleSelection(model) {
-    const selected = selectedModels.includes(model)
-      ? selectedModels.filter((item) => item !== model)
-      : [...selectedModels, model];
-    setSelectedModels(selected);
-    setCarData(filteredData.filter((car) => selected.includes(car.model)));
-  }
-
-  function handleSearch(e) {
-    setSearch(e.target.value);
-  }
+  function handleBrandSelection(brand) {
+    setSelectedBrands((prevSelectedBrands) =>
+      prevSelectedBrands.includes(brand)
+        ? prevSelectedBrands.filter((item) => item !== brand)
+        : [...prevSelectedBrands, brand]
+    );
+  }  
 
   return (
     <Paper elevation={4} sx={{ minWidth: "190px", width: "50%", height: "190px" }}>
