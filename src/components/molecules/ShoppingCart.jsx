@@ -13,13 +13,12 @@ export default function ShoppingCart() {
       sx={{
         display: "flex",
         maxWidth: "50%",
-        minWidth: "250px",
+        minWidth: "220px",
         height: 270,
-        alignItems: "center"
 
       }}
     >
-      <List sx={{ width: "100%", overflowY: "auto", maxHeight: "250px", padding: 0}}>
+      <List sx={{ width: "100%", overflowY: "auto", maxHeight: "270px", padding: 0}}>
         {cartProducts.map(item => 
         <CartItem key={item.id} item={item} />
         )}

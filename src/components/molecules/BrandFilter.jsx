@@ -1,55 +1,51 @@
-import { useContext, useState, useEffect, useMemo } from "react";
+import { useContext, useState, useEffect } from "react";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import CarContext from "../../contexts/CarContext";
-
+import { Search } from "@mui/icons-material";
 export default function BrandFilter() {
-  const { brandData } = useContext(CarContext);
-  const [search, setSearch] = useState("");
-  const [selectedBrands, setSelectedBrands] = useState([]);
+  const { brandData, setCarData, data, setModelData, carData, selected, setSelected} = useContext(CarContext);
+  const [query, setQuery] = useState("");
 
-  const filteredBrands = useMemo(
-    () =>
-      search
-        ? brandData.filter((brand) => brand.toLowerCase().includes(search))
-        : brandData,
-    [search, brandData]
-  );
+
+  useEffect(() => {
+    if (selected.size > 0) {
+      const filteredCarData = data.filter((car) => selected.has(car.brand));
+      setCarData(filteredCarData);
+      const filteredModels = Array.from(new Set(filteredCarData.map(car => car.model)));
+      setModelData(filteredModels);
+    } else {
+      setCarData(data);
+      const originalModels = Array.from(new Set(data.map(car => car.model)));
+      setModelData(originalModels);    
+    }
+  }, [selected]);
+
 
   function handleBrandSelection(brand) {
-    setSelectedBrands((prevSelectedBrands) =>
-      prevSelectedBrands.includes(brand)
-        ? prevSelectedBrands.filter((item) => item !== brand)
-        : [...prevSelectedBrands, brand]
-    );
+      selected.has(brand) ? selected.delete(brand) : selected.add(brand);
+      setSelected(new Set(selected));
   }
 
   function handleBrandSearch(event) {
-    setSearch(event.target.value.toLowerCase());
+      setQuery(event.target.value.toLowerCase());
   }
+
+
+  const filteredBrands = query ? brandData.filter((brand) => brand.toLowerCase().includes(query)) : brandData;
 
   return (
     <Paper elevation={4} sx={{ minWidth: "190px", width: "50%", height: "190px" }}>
-      <TextField
-        id="outlined-search"
-        label="Search Brand"
-        type="search"
-        onChange={handleBrandSearch}
-      />
+      <TextField id="outlinedsearch" label="Search Brand" type="search" onChange={handleBrandSearch} />
       <FormGroup row sx={{ marginLeft: 2, overflowY: "auto", maxHeight: 120 }}>
         {filteredBrands.map((brand, index) => (
           <FormControlLabel
             key={index}
             sx={{ minWidth: "150px" }}
-            control={
-              <Checkbox
-                onChange={() => handleBrandSelection(brand)}
-                checked={selectedBrands.includes(brand)}
-              />
-            }
+            control={<Checkbox onChange={() => handleBrandSelection(brand)} checked={selected.has(brand)} />}
             label={brand}
           />
         ))}
@@ -57,5 +53,6 @@ export default function BrandFilter() {
     </Paper>
   );
 }
+
 
 

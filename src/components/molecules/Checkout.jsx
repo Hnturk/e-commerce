@@ -9,7 +9,7 @@ function Checkout() {
   const { totalPrice } = useContext(CarContext);
 
   return (
-    <Paper elevation={6} sx={{ minWidth: "250px", width: "50%", height: "100px" }}>
+    <Paper elevation={6} sx={{ minWidth: "220px", width: "50%", height: "100px" }}>
       <Typography variant="h6" gutterBottom sx={{ marginLeft: "10px" }}>
         Total Price <span style={{ color: "#1976d2" }}>${totalPrice}</span>
       </Typography>

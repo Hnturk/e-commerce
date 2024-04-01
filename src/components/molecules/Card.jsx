@@ -11,14 +11,13 @@ import CarContext from '../../contexts/CarContext';
 
 export default function ProductCard({ car }) {
 
-  const { addToCart } = useContext(CarContext);
+  const { addToCart, cartProducts} = useContext(CarContext);
 
   const navigate = useNavigate();
 
-  const [isClicked, setIsClicked] = useState(false);
+  const isClicked = cartProducts.find((e) => e.id === car.id) ? true : false;
 
   function handleClick() {
-    setIsClicked(!isClicked);    
     addToCart(car.price, car?.name, car.count, car.id)
   }
 
@@ -33,6 +32,7 @@ export default function ProductCard({ car }) {
           component="img"
           height="120"
           image={car?.image}
+          loading="eager"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" color="primary" sx={{fontSize: "clamp(15px, 1.3vw, 22px)", }}>
@@ -48,6 +48,7 @@ export default function ProductCard({ car }) {
           className={isClicked ? "" : "button" } 
           sx={{fontSize: "clamp(12px, 0.72vw, 15px)"}}
           size="medium" 
+          disabled={isClicked}
           variant={isClicked ? "outlined" : "contained" } 
           fullWidth={true} 
           onClick={handleClick}

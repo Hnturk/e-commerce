@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect} from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
@@ -17,20 +17,15 @@ export default function SearchBar() {
     setIsExpanded(!isExpanded);
   }
 
-  function handleSearch(e) {
-    const searchedCar = e.target.value.toLowerCase();
-    setSearch(searchedCar);
-
-    if (search === "") {
-      setCarData(data);
-    } else {
-      const searchedData = data.filter((item) =>
-        item.name.toLowerCase().includes(search));
-      setCarData(searchedData);
-      console.log(carData);
-    }
-    
+  function handleSearch(event) {
+    setSearch(event.target.value.toLowerCase());
   }
+
+  useEffect(() => {
+    search ? setCarData(data.filter((car) => car.name.toLowerCase().includes(search))) : setCarData(data);        
+  }, [search]);
+
+  
 
   return (
     <Paper
@@ -43,9 +38,9 @@ export default function SearchBar() {
         p: "2px 4px",
         display: "flex",
         alignItems: "center",
-        width: "clamp(150px, 21vw, 450px)",
         minWidth: "150px",
-        marginRight: "clamp(20px, 6.8vw, 113px)"
+        marginRight: { md: "0px", xl: "clamp(20px, 6.8vw, 113px)"},
+        width: { md: "480px", xl: "clamp(150px, 21vw, 450px)"}, 
       }}
     >
       <IconButton type="button" sx={{ p: "10px" }} aria-label="search">

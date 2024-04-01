@@ -5,12 +5,12 @@ import Wallet from "../../atoms/Wallet";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import Link from "@mui/material/Link";
-import "../../../style/components/atoms/SearchBar-min.css"
-import "../../../style/components/atoms/NavbarIcons-min.css"
+import "../../../style/components/atoms/SearchBar-min.css";
+import "../../../style/components/atoms/NavbarIcons-min.css";
 function Navbar() {
   return (
     <Grid
-    container
+      container
       style={{
         maxWidth: "100%",
         height: "70px",
@@ -26,22 +26,22 @@ function Navbar() {
           placeItems: "center",
           justifyContent: "right",
           alignItems: "center",
-          gap: "50px", 
+          paddingRight: "50px",
+
         }}
         xs={6}
         sm={6}
-        md={6}
-        lg={6}
-        xl={6}
+        md={8.6}
+        lg={2.7}
+        xl={2.7}
       >
-        <Link
-        underline = "none"
-        href = "/">
-        
-        <Typography className="brand" variant="h4" color="white">
-          Eteration
-        </Typography>
+        <Link underline="none" href="/">
+          <Typography className="brand" variant="h4" color="white">
+            Eteration
+          </Typography>
         </Link>
+      </Grid>
+      <Grid xs={6} sm={6} md={8.6} lg={5.7} xl={5.7} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", paddingLeft: "12px"}}>
         <SearchBar />
       </Grid>
 
@@ -53,13 +53,12 @@ function Navbar() {
           minWidth: "300px",
           alignItems: "center",
           justifyContent: "center",
-
         }}
         xs={4}
         sm={4}
-        md={4}
-        lg={4}
-        xl={4}
+        md={3.4}
+        lg={3.6}
+        xl={3.6}
       >
         <Wallet />
         <Account />

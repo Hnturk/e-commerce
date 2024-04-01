@@ -18,6 +18,9 @@ function Provider({ children }) {
   const [isVisible, setIsVisible] = useState(false);
   const [product, setProduct] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
+  const [filteredCarData, setFilteredCarData] = useState([]);
+  const [selected, setSelected] = useState(new Set());
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = () => {
     axios.get(api)
@@ -28,7 +31,8 @@ function Provider({ children }) {
         setBrandData(Array.from(new Set(data.map((car) => car.brand))));
         setModelData(Array.from(new Set(data.map((car) => car.model))));
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => setIsLoading(false));
   };
 
 
@@ -61,12 +65,6 @@ function Provider({ children }) {
     addAndCount(newCartProduct);
   }
 
-  useEffect(() => {
-    let newData = data.filter((item) =>
-      item.name.toLowerCase().includes(search.toLowerCase().trim())
-    );
-    setCarData(newData);
-  }, [search, data]);
 
 
   useEffect(() => {
@@ -117,6 +115,12 @@ function Provider({ children }) {
     addToCart,
     isClicked,
     setIsClicked,
+    filteredCarData, 
+    setFilteredCarData,
+    selected, 
+    setSelected,
+    isLoading, 
+    setIsLoading
   };
 
   return (

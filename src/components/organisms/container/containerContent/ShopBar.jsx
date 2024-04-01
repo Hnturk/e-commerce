@@ -16,8 +16,8 @@ function ShopBar() {
         display: "flex",
         flexDirection: "column",
         gap: 2,
-        alignItems: { md: "center", xl: "start" },
-      }}
+        alignItems: {md: "flex-start", lg: "center", xl: "flex-start"},
+        padding: {md: "12px 0", lg: "10px 20px",}}}
     >
       <ShoppingCart />
       <Checkout />
