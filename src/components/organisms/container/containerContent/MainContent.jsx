@@ -28,12 +28,12 @@ function MainContent() {
 
   return (
     <>
-        <Paper sx={{ display: { md:"none", xs:"flex" }, justifyContent: "space-evenly", alignItems: "center",height: "80px", width: { sm:"95%", xs:"90%" }, marginTop: "20px"}}
+        <Paper sx={{ display: isLoading ? "none" : { md:"none", xs:"flex" }, justifyContent: "space-evenly", alignItems: "center",height: "80px", width: { sm:"95%", xs:"90%" }, marginTop: "20px"}}
         elevation={4}>
-          <Button variant="contained" sx={{ height: "60px", width: { sm: "200px", xs: "150px"}}}>
+          <Button className="button"  variant="contained" sx={{ height: "60px", width: { sm: "200px", xs: "150px"}}}>
             <FilterAltIcon sx={{marginRight: "5px"}} /> Filter
           </Button>
-          <Button variant="contained" sx={{ height: "60px", width: { sm: "200px", xs: "150px"}}}>
+          <Button className="button" variant="contained" sx={{ height: "60px", width: { sm: "200px", xs: "150px"}}}>
             <ShoppingCartIcon sx={{marginRight: "5px"}}/> Open Cart
           </Button>
         </Paper>

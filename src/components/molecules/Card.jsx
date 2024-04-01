@@ -34,7 +34,7 @@ export default function ProductCard({ car }) {
           image={car?.image}
           loading="eager"
         />
-        <CardContent>
+        <CardContent sx={{ padding: "16px 5px"}}>
           <Typography gutterBottom variant="h5" component="div" color="primary" sx={{fontSize: "clamp(15px, 1.3vw, 22px)", }}>
             {car?.price}
           </Typography>

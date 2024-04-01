@@ -22,17 +22,16 @@ function Navbar() {
       <Grid
         className="logo"
         style={{
-          display: "flex",
+          display: "grid",
           placeItems: "center",
-          justifyContent: "right",
+          justifyContent: {xl: "right", lg: "center"},
           alignItems: "center",
-          paddingRight: "50px",
-
+          paddingRight: {xl: "50px", lg: "0px"},
         }}
         xs={6}
         sm={6}
-        md={8.6}
-        lg={2.7}
+        md={3}
+        lg={2.8}
         xl={2.7}
       >
         <Link underline="none" href="/">
@@ -41,7 +40,12 @@ function Navbar() {
           </Typography>
         </Link>
       </Grid>
-      <Grid xs={6} sm={6} md={8.6} lg={5.7} xl={5.7} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", paddingLeft: "12px"}}>
+      <Grid xs={6} 
+            sm={6} 
+            md={4.5} 
+            lg={6} 
+            xl={5.7} 
+            sx={{ display: "flex", alignItems: "center", justifyContent: {xl: "flex-start", lg: "center", md: "center"}, paddingLeft: {xl: "12px", lg: "0px"}}}>
         <SearchBar />
       </Grid>
 
@@ -50,14 +54,15 @@ function Navbar() {
         style={{
           display: "flex",
           gap: "18px",
-          minWidth: "300px",
+          minWidth: "250px",
           alignItems: "center",
           justifyContent: "center",
+          
         }}
-        xs={4}
-        sm={4}
-        md={3.4}
-        lg={3.6}
+        xs={0}
+        sm={0}
+        md={3.5}
+        lg={3}
         xl={3.6}
       >
         <Wallet />
