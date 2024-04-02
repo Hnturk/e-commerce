@@ -118,11 +118,9 @@ function MainContent() {
           ))}
         </Grid>
       )}
-
+      <Paper elevation={4} sx={{ display: isLoading ? "none" : "flex", height: "40px", alignItems: "center", justifyContent: "center"}}>
       <Stack spacing={2}>
         <Pagination
-          
-          sx={{ display: isLoading ? "none" : "block"}}
           color="primary"
           count={Math.ceil(carData?.length / itemsPerPage)}
           page={currentPage}
@@ -130,6 +128,7 @@ function MainContent() {
           disabled={isLoading}
         />
       </Stack>
+      </Paper>
     </>
   );
 }

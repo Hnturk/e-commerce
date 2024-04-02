@@ -11,9 +11,10 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import Drawer from "@mui/material/Drawer";
+import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import "../../../style/components/organisms/container/containerProduct/ProductDetail-min.css";
+
 
 function ProductContainer() {
 
@@ -23,12 +24,11 @@ function ProductContainer() {
   };
 
   return (
-    <Grid sx={{ height: "calc(100vh - 77px)" }} container>
+    <Grid sx={{ height: "calc(100vh - 77px)", display: "flex", flexDirection: {xs: "column", sm: "column", md: "row-reverse", lg: "row-reverse", xl: "row-reverse"}, bgcolor: "purple" }} container>
 
-<Grid sx={{ padding: 0 }} xs={12} sm={0} md={4} lg={2.7} xl={2.7}>
-        {/* < style={{ display: {} }}></> */}
-        {/* <Button
-          
+      <Grid  sx={{ padding: 0,}} xs={12} sm={12} md={4} lg={2.7} xl={2.7}>
+        <Paper className="shoppingCart"  elevation={4} sx={{width: "250px", display: {xs: "flex", sm: "flex", md: "none", lg: "none", xl: "none"}, alignItems: "center", padding: "10px"}}>
+        <Button
           onClick={cartDrawer(true)}
           className="button"
           variant="contained"
@@ -36,18 +36,24 @@ function ProductContainer() {
         >
           <ShoppingCartIcon sx={{ marginRight: "5px" }} /> Open Cart
         </Button>
-        <Drawer anchor="bottom" open={cartOpen} onClose={cartDrawer(false)}>
+        <Drawer  anchor="bottom" open={cartOpen} onClose={cartDrawer(false)}>
           <ShopBar />
-        </Drawer> */}
+        </Drawer>
+        </Paper>
+      <Grid sx={{display: {xs: "none", sm: "none", md: "flex", lg: "flex", xl: "flex"}}}>
+          <ShopBar/>
+      </Grid>
       </Grid>
 
       <Grid
         sx={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
           flexDirection: "column",
           padding: 0,
           bgcolor: "green",
+          height: "calc(100vh - 160px)",
         }}
         xs={12}
         sm={12}

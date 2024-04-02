@@ -1,3 +1,17 @@
-.deneme {
-  font-size: 100px;
+.shoppingCart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 80px;
+  background-color: rgb(255, 217, 0);
+}
+
+@media screen and (max-width: 600px) {
+  .mobilCheckout {
+    display: flex;
+    width: 100%;
+    background-color: red;
+    padding: 0%;
+  }
 }

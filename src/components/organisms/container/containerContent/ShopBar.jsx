@@ -5,6 +5,7 @@ import Checkout from "../../../molecules/Checkout";
 function ShopBar() {
   return (
     <Grid
+      className="mobilCheckout"
       container
       spacing={2}
       sx={{
