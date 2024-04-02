@@ -38,9 +38,10 @@ export default function SearchBar() {
         p: "2px 4px",
         display: "flex",
         alignItems: "center",
+        justifyContent: "center",
         minWidth: "150px",
-        marginRight: { md: "0px", xl: "clamp(20px, 6.8vw, 113px)"},
-        width: {sm: "200px", md: "370px", lg: "450px", xl: "clamp(150px, 21vw, 450px)"}, 
+        marginRight: {xs:"0px", sm: "0px", md: "0px", xl: "clamp(20px, 6.8vw, 113px)"},
+        width: {xs: "85%", sm: "85%", md: "370px", lg: "450px", xl: "clamp(150px, 21vw, 450px)"}, 
       }}
     >
       <IconButton type="button" sx={{ p: "10px" }} aria-label="search">

@@ -10,10 +10,10 @@ function FilterBar() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        alignItems: { md: "flex-end", lg: "center", xl: "flex-end" },
+        alignItems: {xs: "center", sm:"center", md: "flex-end", lg: "center", xl: "flex-end" },
         justifyContent: "flex-start",
         height: "100%",
-        width: "100%",
+        width:  {xs:"250px", sm:"250px", md:"100%", lg:"100%", xl: "100%"},
         gap: 4,
         margin: 0,
         paddingRight: "10px",

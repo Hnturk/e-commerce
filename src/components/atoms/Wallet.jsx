@@ -11,7 +11,7 @@ function Wallet() {
   return (
     <Link
       className="icon"
-      sx={{ display: "flex", alignItems: "center", gap: 1 }}
+      sx={{ display: {xs: "none", sm: "none", md: "flex", lg: "flex", xl: "flex"}, alignItems: "center", gap: 1 }}
       href="#"
       underline="none"
       color= "#fff"

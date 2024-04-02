@@ -7,11 +7,16 @@ import CarContext from "../../../../contexts/CarContext";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShopBar from "../../../../components/organisms/container/containerContent/ShopBar";
+import Drawer from "@mui/material/Drawer";
+import FilterBar from "../../../../components/organisms/container/containerContent/FilterBar";
 function MainContent() {
   const { carData, isLoading } = useContext(CarContext);
+
+  const [cartOpen, setCartOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -26,17 +31,53 @@ function MainContent() {
     setCurrentPage(value);
   }
 
+  const cartDrawer = (newOpen) => () => {
+    setCartOpen(newOpen);
+  };
+
+  const filterDrawer = (newOpen) => () => {
+    setFilterOpen(newOpen);
+  };
+
+
   return (
     <>
-        <Paper sx={{ display: isLoading ? "none" : { md:"none", xs:"flex" }, justifyContent: "space-evenly", alignItems: "center",height: "80px", width: { sm:"95%", xs:"90%" }, marginTop: "20px"}}
-        elevation={4}>
-          <Button className="button"  variant="contained" sx={{ height: "60px", width: { sm: "200px", xs: "150px"}}}>
-            <FilterAltIcon sx={{marginRight: "5px"}} /> Filter
-          </Button>
-          <Button className="button" variant="contained" sx={{ height: "60px", width: { sm: "200px", xs: "150px"}}}>
-            <ShoppingCartIcon sx={{marginRight: "5px"}}/> Open Cart
-          </Button>
-        </Paper>
+      <Paper
+        sx={{
+          display: isLoading ? "none" : { md: "none", xs: "flex" },
+          justifyContent: "space-evenly",
+          alignItems: "center",
+          height: "80px",
+          width: { sm: "95%", xs: "90%" },
+          marginTop: "20px",
+        }}
+        elevation={4}
+      >
+        <div>
+        <Button
+          onClick={filterDrawer(true)}
+          className="button"
+          variant="contained"
+          sx={{ height: "60px", width: { sm: "200px", xs: "150px" } }}
+        >
+          <FilterAltIcon sx={{ marginRight: "5px" }} /> Filter
+        </Button>
+        <Drawer  open={filterOpen} onClose={filterDrawer(false)}>
+          <FilterBar style={{ width: "250px"}}/>
+        </Drawer>
+        </div>
+        <Button
+          onClick={cartDrawer(true)}
+          className="button"
+          variant="contained"
+          sx={{ height: "60px", width: { sm: "200px", xs: "150px" } }}
+        >
+          <ShoppingCartIcon sx={{ marginRight: "5px" }} /> Open Cart
+        </Button>
+        <Drawer anchor="right" open={cartOpen} onClose={cartDrawer(false)}>
+          <ShopBar />
+        </Drawer>
+      </Paper>
       {isLoading ? (
         <>
           <CircularProgress />
@@ -45,7 +86,7 @@ function MainContent() {
       ) : (
         <Grid
           sx={{
-            width: { md: "95%", xl: "100%" },
+            width: {xs:"80%", sm: "85%", md: "100%", lg:"100%", xl: "100%" },
             maxHeight: "100%",
             margin: 0,
             padding: 0,
@@ -95,3 +136,4 @@ function MainContent() {
 }
 
 export default MainContent;
+

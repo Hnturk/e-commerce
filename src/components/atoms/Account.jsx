@@ -7,7 +7,7 @@ function Account() {
   return (
     <Link
     className="icon"
-      sx={{ gap: 1, }}
+      sx={{ gap: 1, display: {xs: "none", sm: "none", md: "flex", lg: "flex", xl: "flex"} }}
       href="/"
       underline="none"
       color= "#fff"
