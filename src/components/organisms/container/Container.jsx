@@ -42,7 +42,7 @@ function Container() {
       </Grid>
       <Grid
       
-        sx={{ display: { xs: "none", sm: "flex", md: "flex", lg: "flex", xl: "flex" }, padding: 0}}
+        sx={{ display: { xs: "none", sm: "none", md: "flex", lg: "flex", xl: "flex" }, padding: 0}}
         xs={false}
         sm={0}
         md={3.15}

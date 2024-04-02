@@ -121,13 +121,12 @@ function MainContent() {
 
       <Stack spacing={2}>
         <Pagination
-          sx={{ display: isLoading ? "none" : "block" }}
+          
+          sx={{ display: isLoading ? "none" : "block"}}
           color="primary"
           count={Math.ceil(carData?.length / itemsPerPage)}
           page={currentPage}
           onChange={handleChange}
-          showFirstButton
-          showLastButton
           disabled={isLoading}
         />
       </Stack>

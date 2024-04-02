@@ -49,7 +49,7 @@ function Navbar() {
         sm={3.5}
         md={3}
         lg={2.8}
-        xl={2.7}
+        xl={2.6}
       >
         <Link underline="none" href="/" sx={{display: {xs: "none", sm: "block", md: "block", lg: "block", xl: "block"}}}>
           <Typography className="brand" variant="h4" color="white">
@@ -61,7 +61,7 @@ function Navbar() {
             sm={5} 
             md={4.5} 
             lg={6} 
-            xl={5.7} 
+            xl={5.6} 
             sx={{ display: "flex", alignItems: "center", justifyContent: {xl: "flex-start", lg: "center", md: "center", sm: "center", xs: "flex-start"}, paddingLeft: {xl: "12px", lg: "0px"}}}>
         <SearchBar />
       </Grid>
@@ -74,7 +74,7 @@ function Navbar() {
           minWidth: {sm: "100px", md: "250px", lg: "250px", xl: "250px"},
           alignItems: "center",
           justifyContent: "center",
-          
+          marginRight: "10px",
         }}
         xs={2}
         sm={2.5}
@@ -82,8 +82,9 @@ function Navbar() {
         lg={3}
         xl={3.6}
       >
-        <div style={{display: {xs: "flex", md: "flex", md: "none", lg: "none", xl: "none" }}}>
+        <div style={{display: {xs: "flex", md: "flex", md: "none", lg: "none", xl: "none" }, }}>
       <Button
+        sx={{minWidth: {xs: "64xp", sm: "0px", md: "0px", lg: "0px", xl: "0px"}}}
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
@@ -101,7 +102,7 @@ function Navbar() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem sx={{height: "50px", width: "150px"}} onClick={handleClose}> <AccountCircle sx={{marginRight: "10px"}} color="primary"/>Profile</MenuItem>
+        <MenuItem sx={{height: "50px", width: "120px"}} onClick={handleClose}> <AccountCircle sx={{marginRight: "10px"}} color="primary"/>Profile</MenuItem>
         <MenuItem sx={{height: "50px"}} onClick={handleClose}>  <AccountBalanceWalletOutlinedIcon sx={{marginRight: "10px"}} color="primary"/> My account</MenuItem>
       </Menu>
       </div>
