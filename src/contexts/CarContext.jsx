@@ -16,7 +16,7 @@ function Provider({ children }) {
   const [productCount, setProductCount] = useState(1);
   const [cartProducts, setCartProducts] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({});
   const [isClicked, setIsClicked] = useState(false);
   const [filteredCarData, setFilteredCarData] = useState([]);
   const [selected, setSelected] = useState(new Set());
@@ -56,7 +56,7 @@ function Provider({ children }) {
 
   function getProduct(image, name, price, description, id) {
     const newProduct = { image, name, price, description, id };
-    setProduct([newProduct]);
+    setProduct(newProduct);
   }
 
   function addToCart(price, name, count, id) {

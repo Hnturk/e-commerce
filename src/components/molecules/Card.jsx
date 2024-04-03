@@ -11,7 +11,7 @@ import CarContext from '../../contexts/CarContext';
 
 export default function ProductCard({ car }) {
 
-  const { addToCart, cartProducts} = useContext(CarContext);
+  const { addToCart, cartProducts, getProduct} = useContext(CarContext);
 
   const navigate = useNavigate();
 
@@ -23,6 +23,7 @@ export default function ProductCard({ car }) {
 
   function handleToggleClick() {
     navigate("/product");
+    getProduct(car?.image, car?.name, car?.price, car?.description, car?.id);
   }
 
   return (

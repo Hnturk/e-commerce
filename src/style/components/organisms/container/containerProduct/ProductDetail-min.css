@@ -1,1 +1,1 @@
-.shoppingCart{display:flex;align-items:center;justify-content:center;flex-direction:column;height:80px;background-color:#ffd900}@media screen and (max-width: 600px){.mobilCheckout{display:flex;width:100%;background-color:red;padding:0%}}
+@media screen and (max-width: 600px){.mobilCheckout{display:flex;width:100%;padding:0%}}.mobilCheckout{width:80%;display:flex}
