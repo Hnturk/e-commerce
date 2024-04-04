@@ -39,7 +39,6 @@ function MainContent() {
     setFilterOpen(newOpen);
   };
 
-
   return (
     <>
       <Paper
@@ -54,17 +53,17 @@ function MainContent() {
         elevation={4}
       >
         <div>
-        <Button
-          onClick={filterDrawer(true)}
-          className="button"
-          variant="contained"
-          sx={{ height: "60px", width: { sm: "200px", xs: "150px" } }}
-        >
-          <FilterAltIcon sx={{ marginRight: "5px" }} /> Filter
-        </Button>
-        <Drawer  open={filterOpen} onClose={filterDrawer(false)}>
-          <FilterBar style={{ width: "250px"}}/>
-        </Drawer>
+          <Button
+            onClick={filterDrawer(true)}
+            className="button"
+            variant="contained"
+            sx={{ height: "60px", width: { sm: "200px", xs: "150px" } }}
+          >
+            <FilterAltIcon sx={{ marginRight: "5px" }} /> Filter
+          </Button>
+          <Drawer open={filterOpen} onClose={filterDrawer(false)}>
+            <FilterBar style={{ width: "250px" }} />
+          </Drawer>
         </div>
         <Button
           onClick={cartDrawer(true)}
@@ -86,7 +85,7 @@ function MainContent() {
       ) : (
         <Grid
           sx={{
-            width: {xs:"80%", sm: "85%", md: "100%", lg:"100%", xl: "100%" },
+            width: { xs: "80%", sm: "85%", md: "100%", lg: "100%", xl: "100%" },
             maxHeight: "100%",
             margin: 0,
             padding: 0,
@@ -118,20 +117,27 @@ function MainContent() {
           ))}
         </Grid>
       )}
-      <Paper elevation={4} sx={{ display: isLoading ? "none" : "flex", height: "40px", alignItems: "center", justifyContent: "center"}}>
-      <Stack spacing={2}>
-        <Pagination
-          color="primary"
-          count={Math.ceil(carData?.length / itemsPerPage)}
-          page={currentPage}
-          onChange={handleChange}
-          disabled={isLoading}
-        />
-      </Stack>
+      <Paper
+        elevation={4}
+        sx={{
+          display: isLoading ? "none" : "flex",
+          height: "40px",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Stack spacing={2}>
+          <Pagination
+            color="primary"
+            count={Math.ceil(carData?.length / itemsPerPage)}
+            page={currentPage}
+            onChange={handleChange}
+            disabled={isLoading}
+          />
+        </Stack>
       </Paper>
     </>
   );
 }
 
 export default MainContent;
-

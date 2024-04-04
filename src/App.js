@@ -4,9 +4,7 @@ import CarContext from "./contexts/CarContext";
 import Main from "./pages/Main";
 import ProductCard from "./pages/ProductCard";
 
-
 function App() {
-
   const { fetchData } = useContext(CarContext);
   useEffect(() => {
     fetchData();

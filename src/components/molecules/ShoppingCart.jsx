@@ -4,8 +4,7 @@ import CartItem from "../atoms/CartItem";
 import CarContext from "../../contexts/CarContext";
 import { useContext } from "react";
 export default function ShoppingCart() {
-
-  const { cartProducts } = useContext(CarContext)
+  const { cartProducts } = useContext(CarContext);
 
   return (
     <Paper
@@ -15,13 +14,19 @@ export default function ShoppingCart() {
         maxWidth: "50%",
         minWidth: "220px",
         height: 270,
-
       }}
     >
-      <List sx={{ width: "100%", overflowY: "auto", maxHeight: "270px", padding: 0}}>
-        {cartProducts.map(item => 
-        <CartItem key={item.id} item={item} />
-        )}
+      <List
+        sx={{
+          width: "100%",
+          overflowY: "auto",
+          maxHeight: "270px",
+          padding: 0,
+        }}
+      >
+        {cartProducts.map((item) => (
+          <CartItem key={item.id} item={item} />
+        ))}
       </List>
     </Paper>
   );

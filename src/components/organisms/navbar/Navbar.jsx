@@ -5,17 +5,16 @@ import Wallet from "../../atoms/Wallet";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import Link from "@mui/material/Link";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import "../../../style/components/atoms/SearchBar-min.css";
 import "../../../style/components/atoms/NavbarIcons-min.css";
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from "@mui/material/MenuItem";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 
 function Navbar() {
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -24,7 +23,7 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   return (
     <Grid
       container
@@ -41,9 +40,9 @@ function Navbar() {
         style={{
           display: "grid",
           placeItems: "center",
-          justifyContent: {xl: "right", lg: "center"},
+          justifyContent: { xl: "right", lg: "center" },
           alignItems: "center",
-          paddingRight: {xl: "50px", lg: "0px"},
+          paddingRight: { xl: "50px", lg: "0px" },
         }}
         xs={0}
         sm={3.5}
@@ -51,18 +50,43 @@ function Navbar() {
         lg={2.8}
         xl={2.6}
       >
-        <Link underline="none" href="/" sx={{display: {xs: "none", sm: "block", md: "block", lg: "block", xl: "block"}}}>
+        <Link
+          underline="none"
+          href="/"
+          sx={{
+            display: {
+              xs: "none",
+              sm: "block",
+              md: "block",
+              lg: "block",
+              xl: "block",
+            },
+          }}
+        >
           <Typography className="brand" variant="h4" color="white">
             Eteration
           </Typography>
         </Link>
       </Grid>
-      <Grid xs={9} 
-            sm={5} 
-            md={4.5} 
-            lg={6} 
-            xl={5.6} 
-            sx={{ display: "flex", alignItems: "center", justifyContent: {xl: "flex-start", lg: "center", md: "center", sm: "center", xs: "flex-start"}, paddingLeft: {xl: "12px", lg: "0px"}}}>
+      <Grid
+        xs={9}
+        sm={5}
+        md={4.5}
+        lg={6}
+        xl={5.6}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: {
+            xl: "flex-start",
+            lg: "center",
+            md: "center",
+            sm: "center",
+            xs: "flex-start",
+          },
+          paddingLeft: { xl: "12px", lg: "0px" },
+        }}
+      >
         <SearchBar />
       </Grid>
 
@@ -71,7 +95,7 @@ function Navbar() {
         style={{
           display: "flex",
           gap: "18px",
-          minWidth: {sm: "100px", md: "250px", lg: "250px", xl: "250px"},
+          minWidth: { sm: "100px", md: "250px", lg: "250px", xl: "250px" },
           alignItems: "center",
           justifyContent: "center",
           marginRight: "10px",
@@ -82,31 +106,76 @@ function Navbar() {
         lg={3}
         xl={3.6}
       >
-        <div style={{display: {xs: "flex", md: "flex", md: "none", lg: "none", xl: "none" }, }}>
-      <Button
-        sx={{minWidth: {xs: "64xp", sm: "0px", md: "0px", lg: "0px", xl: "0px"}}}
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        <MenuIcon sx={{ display: {xs: "block", md: "block", md: "none", lg: "none", xl: "none" }, color: "white", height: "40px", width: "40px"}}/>
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem sx={{height: "50px", width: "120px"}} onClick={handleClose}> <AccountCircle sx={{marginRight: "10px"}} color="primary"/>Profile</MenuItem>
-        <MenuItem sx={{height: "50px"}} onClick={handleClose}>  <AccountBalanceWalletOutlinedIcon sx={{marginRight: "10px"}} color="primary"/> My account</MenuItem>
-      </Menu>
-      </div>
-        
+        <div
+          style={{
+            display: {
+              xs: "flex",
+              md: "flex",
+              md: "none",
+              lg: "none",
+              xl: "none",
+            },
+          }}
+        >
+          <Button
+            sx={{
+              minWidth: {
+                xs: "64xp",
+                sm: "0px",
+                md: "0px",
+                lg: "0px",
+                xl: "0px",
+              },
+            }}
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          >
+            <MenuIcon
+              sx={{
+                display: {
+                  xs: "block",
+                  md: "block",
+                  md: "none",
+                  lg: "none",
+                  xl: "none",
+                },
+                color: "white",
+                height: "40px",
+                width: "40px",
+              }}
+            />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem
+              sx={{ height: "50px", width: "120px" }}
+              onClick={handleClose}
+            >
+              {" "}
+              <AccountCircle sx={{ marginRight: "10px" }} color="primary" />
+              Profile
+            </MenuItem>
+            <MenuItem sx={{ height: "50px" }} onClick={handleClose}>
+              {" "}
+              <AccountBalanceWalletOutlinedIcon
+                sx={{ marginRight: "10px" }}
+                color="primary"
+              />{" "}
+              My account
+            </MenuItem>
+          </Menu>
+        </div>
+
         <Wallet />
         <Account />
       </Grid>

@@ -1,9 +1,14 @@
 .icon {
-  background-image: linear-gradient(to right, #ffffff, rgb(0, 212, 255) 50%, #ffffff 50%);
+  background-image: linear-gradient(
+    to right,
+    #ffffff,
+    rgb(0, 212, 255) 50%,
+    #ffffff 50%
+  );
   background-size: 200% 100%;
   background-position: -100%;
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   display: flex;
   align-items: center;
   padding: 5px 0;
@@ -49,11 +54,16 @@
 }
 
 .brand {
-  background-image: linear-gradient(to right, #ffffff, rgb(0, 212, 255) 50%, #ffffff 50%);
+  background-image: linear-gradient(
+    to right,
+    #ffffff,
+    rgb(0, 212, 255) 50%,
+    #ffffff 50%
+  );
   background-size: 200% 100%;
   background-position: -100%;
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   padding: 0px 0;
   position: relative;
   -webkit-text-fill-color: transparent;
