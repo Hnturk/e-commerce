@@ -1,6 +1,6 @@
-import React from 'react'
-import Navbar from '../components/organisms/navbar/Navbar';
-import Container from '../components/organisms/container/Container';
+import React from "react";
+import Navbar from "../components/organisms/navbar/Navbar";
+import Container from "../components/organisms/container/Container";
 
 function Main() {
   return (
@@ -8,7 +8,7 @@ function Main() {
       <Navbar />
       <Container />
     </div>
-  )
+  );
 }
 
-export default Main
+export default Main;

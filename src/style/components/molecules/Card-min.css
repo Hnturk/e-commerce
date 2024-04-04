@@ -1,1 +1,18 @@
-@keyframes spin{from{transform:rotate(290deg)}to{transform:rotate(360deg)}}.card{min-width:185px;height:270px;width:90%;padding:10px}.card:hover{scale:1.05;transition:scale .25s ease}
+@keyframes spin {
+  from {
+    transform: rotate(290deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.card {
+  min-width: 185px;
+  height: 270px;
+  width: 90%;
+  padding: 10px;
+}
+.card:hover {
+  scale: 1.05;
+  transition: scale 0.25s ease;
+}

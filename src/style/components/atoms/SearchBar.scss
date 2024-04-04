@@ -7,10 +7,10 @@
   min-width: 150px;
   margin-right: clamp(20px, 6.8vw, 113px);
   box-sizing: border-box;
-  transition: height 0.20s ease !important; 
-  }
-  
-  .search-bar.expanded {
-    height: 48px; 
-    border: 1px solid #000;
-  }
+  transition: height 0.2s ease !important;
+}
+
+.search-bar.expanded {
+  height: 48px;
+  border: 1px solid #000;
+}

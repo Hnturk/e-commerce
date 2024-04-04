@@ -1,4 +1,4 @@
-html{
+html {
   width: 100%;
 }
 
@@ -511,14 +511,14 @@ body {
   border: none;
   padding: 5px;
   box-sizing: border-box;
-  transition: height 0.15s ease; 
+  transition: height 0.15s ease;
 }
 
 .filter-search.expanded {
-  height: 48px; 
+  height: 48px;
   border: 1px solid #1976d2;
 }
 
 .filter-search-container:hover {
-  width: 70px; 
+  width: 70px;
 }

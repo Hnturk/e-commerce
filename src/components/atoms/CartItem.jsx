@@ -16,12 +16,12 @@ export default function CartItem({ item }) {
 
   function handleIncrease(productID) {
     const updatedList = cartProducts.map((object) =>
-      object.id === productID ? { ...object, count: object.count + 1 } : object
+      object.id === productID ? { ...object, count: object.count + 1 } : object,
     );
 
     const totalPrice = updatedList.reduce(
       (acc, { price, count }) => acc + price * count,
-      0
+      0,
     );
 
     setTotalPrice(totalPrice);
@@ -35,13 +35,13 @@ export default function CartItem({ item }) {
           ? object.count - 1 <= 0
             ? undefined
             : { ...object, count: object.count - 1 }
-          : object
+          : object,
       )
       .filter((object) => object !== undefined);
 
     const totalPrice = updatedList.reduce(
       (acc, { price, count }) => acc + price * count,
-      0
+      0,
     );
 
     setTotalPrice(totalPrice);

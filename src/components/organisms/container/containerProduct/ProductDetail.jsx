@@ -49,7 +49,7 @@ function ProductDetail({ car }) {
             xl: "49.5%",
           },
           height: { xs: "50%", sm: "50%", md: "50%", lg: "100%", xl: "100%" },
-                 }}
+        }}
       >
         <CardMedia
           component="img"
@@ -78,25 +78,37 @@ function ProductDetail({ car }) {
           height: { xs: "50%", sm: "50%", md: "50%", lg: "100%", xl: "100%" },
         }}
       >
-        <CardContent
-          sx={{ padding: "16px 5px",   height: "85%" }}
-        >
-          <Typography variant="h5" color="text.secondary" sx={{ fontSize: {
+        <CardContent sx={{ padding: "16px 5px", height: "85%" }}>
+          <Typography
+            variant="h5"
+            color="text.secondary"
+            sx={{
+              fontSize: {
                 xs: "22px",
                 sm: "22px",
                 md: "24px",
                 lg: "28px",
                 xl: "28px",
-              } }}>
+              },
+            }}
+          >
             {car?.name}
           </Typography>
-          <Typography gutterBottom variant="h5" component="Box" color="primary"  sx={{ fontSize: {
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="Box"
+            color="primary"
+            sx={{
+              fontSize: {
                 xs: "22px",
                 sm: "22px",
                 md: "24px",
                 lg: "28px",
                 xl: "28px",
-              } }}>
+              },
+            }}
+          >
             {car?.price}
           </Typography>
           <Typography
@@ -104,7 +116,7 @@ function ProductDetail({ car }) {
             color="text.secondary"
             sx={{
               overflowY: "auto",
-                           maxHeight: {
+              maxHeight: {
                 xs: "196px",
                 sm: "155px",
                 md: "155px",

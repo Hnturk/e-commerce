@@ -23,29 +23,28 @@ function Provider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = () => {
-    axios.get(api)
-      .then(response => response.data)
-      .then(data => {
+    axios
+      .get(api)
+      .then((response) => response.data)
+      .then((data) => {
         setData(data);
         setCarData(data);
         setBrandData(Array.from(new Set(data.map((car) => car.brand))));
         setModelData(Array.from(new Set(data.map((car) => car.model))));
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
   };
 
-
-
   function addAndCount(newCartProduct) {
     const isSameID = cartProducts.some(
-      (object) => object.id === newCartProduct.id
+      (object) => object.id === newCartProduct.id,
     );
     if (isSameID) {
       const updatedList = cartProducts.map((object) =>
         object.id === newCartProduct.id
           ? { ...object, count: object.count + 1 }
-          : object
+          : object,
       );
       setCartProducts(updatedList);
     } else {
@@ -64,8 +63,6 @@ function Provider({ children }) {
     setTotalPrice(totalPrice + parseInt(price));
     addAndCount(newCartProduct);
   }
-
-
 
   useEffect(() => {
     const storedCartProducts = localStorage.getItem("cartProducts");
@@ -115,12 +112,12 @@ function Provider({ children }) {
     addToCart,
     isClicked,
     setIsClicked,
-    filteredCarData, 
+    filteredCarData,
     setFilteredCarData,
-    selected, 
+    selected,
     setSelected,
-    isLoading, 
-    setIsLoading
+    isLoading,
+    setIsLoading,
   };
 
   return (

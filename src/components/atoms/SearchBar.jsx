@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useContext, useEffect} from "react";
+import { useState, useContext, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
@@ -7,7 +7,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import CarContext from "../../contexts/CarContext";
 
 export default function SearchBar() {
-
   const { carData, setCarData, data } = useContext(CarContext);
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -22,10 +21,12 @@ export default function SearchBar() {
   }
 
   useEffect(() => {
-    search ? setCarData(data.filter((car) => car.name.toLowerCase().includes(search))) : setCarData(data);        
+    search
+      ? setCarData(
+          data.filter((car) => car.name.toLowerCase().includes(search)),
+        )
+      : setCarData(data);
   }, [search]);
-
-  
 
   return (
     <Paper
@@ -40,14 +41,29 @@ export default function SearchBar() {
         alignItems: "center",
         justifyContent: "center",
         minWidth: "150px",
-        marginRight: {xs:"0px", sm: "0px", md: "0px", xl: "clamp(20px, 6.8vw, 113px)"},
-        width: {xs: "85%", sm: "85%", md: "370px", lg: "450px", xl: "clamp(150px, 21vw, 450px)"}, 
+        marginRight: {
+          xs: "0px",
+          sm: "0px",
+          md: "0px",
+          xl: "clamp(20px, 6.8vw, 113px)",
+        },
+        width: {
+          xs: "85%",
+          sm: "85%",
+          md: "370px",
+          lg: "450px",
+          xl: "clamp(150px, 21vw, 450px)",
+        },
       }}
     >
       <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
         <SearchIcon />
       </IconButton>
-      <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search" onChange={handleSearch}/>
+      <InputBase
+        sx={{ ml: 1, flex: 1 }}
+        placeholder="Search"
+        onChange={handleSearch}
+      />
     </Paper>
   );
 }

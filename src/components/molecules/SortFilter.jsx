@@ -14,40 +14,39 @@ const options = [
   { label: "Price low to high", value: "lowToHigh" },
 ];
 export default function SortFilter() {
+  const { carData, setCarData } = useContext(CarContext);
+  const [selectedValue, setSelectedValue] = useState("");
 
-  const { carData, setCarData } = useContext(CarContext)
-  const [selectedValue, setSelectedValue] = useState("")
-
-  function handleClick(value){
+  function handleClick(value) {
     setSelectedValue(value);
 
     let sortedData = [];
     switch (value) {
       case "oldToNew":
         sortedData = [...carData].sort(
-          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+          (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
         );
         break;
       case "newToOld":
         sortedData = [...carData].sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         );
         break;
       case "highToLow":
         sortedData = [...carData].sort(
-          (a, b) => parseFloat(b.price) - parseFloat(a.price)
+          (a, b) => parseFloat(b.price) - parseFloat(a.price),
         );
         break;
       case "lowToHigh":
         sortedData = [...carData].sort(
-          (a, b) => parseFloat(a.price) - parseFloat(b.price)
+          (a, b) => parseFloat(a.price) - parseFloat(b.price),
         );
         break;
       default:
         break;
     }
     setCarData(sortedData);
-  } 
+  }
 
   return (
     <Paper sx={{ minWidth: "190px", width: "50%", height: "200px" }}>
@@ -56,11 +55,15 @@ export default function SortFilter() {
         <RadioGroup>
           {options.map((option) => (
             <FormControlLabel
-            value={option.value}
-            control={<Radio 
-            checked = {option.value === selectedValue}
-            onChange={() => handleClick(option.value)} />}
-            label={option.label} />
+              value={option.value}
+              control={
+                <Radio
+                  checked={option.value === selectedValue}
+                  onChange={() => handleClick(option.value)}
+                />
+              }
+              label={option.label}
+            />
           ))}
         </RadioGroup>
       </FormControl>
