@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
 import api from "../lib/api/api";
+
 export const CarContext = createContext();
 
 function Provider({ children }) {
@@ -10,15 +11,8 @@ function Provider({ children }) {
   const [brandData, setBrandData] = useState(data);
   const [modelData, setModelData] = useState(data);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [search, setSearch] = useState("");
-  const [modelSearch, setModelSearch] = useState("");
-  const [brandSearch, setBrandSearch] = useState("");
-  const [productCount, setProductCount] = useState(1);
   const [cartProducts, setCartProducts] = useState([]);
-  const [isVisible, setIsVisible] = useState(false);
   const [product, setProduct] = useState({});
-  const [isClicked, setIsClicked] = useState(false);
-  const [filteredCarData, setFilteredCarData] = useState([]);
   const [selected, setSelected] = useState(new Set());
   const [isLoading, setIsLoading] = useState(true);
 
@@ -65,8 +59,6 @@ function Provider({ children }) {
     addAndCount(newCartProduct);
   }
 
-
-
   useEffect(() => {
     const storedCartProducts = localStorage.getItem("cartProducts");
     const storedTotalPrice = localStorage.getItem("totalPrice");
@@ -90,7 +82,6 @@ function Provider({ children }) {
     setData,
     brandData,
     setBrandData,
-    setSearch,
     carData,
     setCarData,
     fetchData,
