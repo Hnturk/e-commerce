@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -6,15 +6,13 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import RemoveCircleOutlineRoundedIcon from "@mui/icons-material/RemoveCircleOutlineRounded";
-import BackspaceOutlinedIcon from "@mui/icons-material/BackspaceOutlined";
-import Divider from "@mui/material/Divider";
 import CarContext from "../../contexts/CarContext";
 
 export default function CartItem({ item }) {
   const { cartProducts, setCartProducts, setTotalPrice } =
     useContext(CarContext);
 
-  function handleIncrease(productID) {
+  const handleIncrease = (productID) => {
     const updatedList = cartProducts.map((object) =>
       object.id === productID ? { ...object, count: object.count + 1 } : object
     );
@@ -26,9 +24,9 @@ export default function CartItem({ item }) {
 
     setTotalPrice(totalPrice);
     setCartProducts(updatedList);
-  }
+  };
 
-  function handleDecrease(productID) {
+  const handleDecrease = (productID) => {
     const updatedList = cartProducts
       .map((object) =>
         object.id === productID
@@ -46,7 +44,7 @@ export default function CartItem({ item }) {
 
     setTotalPrice(totalPrice);
     setCartProducts(updatedList);
-  }
+  };
 
   return (
     <List sx={{ padding: 0 }}>
@@ -69,15 +67,6 @@ export default function CartItem({ item }) {
             >
               <AddCircleOutlineRoundedIcon color="primary" />
             </Button>
-            {/* <Divider orientation="vertical" flexItem /> */}
-            {/* {count > 0 ? (
-                <Button
-                  color="error"
-                  sx={{ minWidth: 25, height: 25, padding: 0 }}
-                >
-                  <BackspaceOutlinedIcon />
-                </Button>
-              ) : null} */}
           </IconButton>
         }
       >

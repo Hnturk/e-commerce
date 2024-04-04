@@ -8,7 +8,7 @@ import CarContext from "../../contexts/CarContext";
 
 export default function SearchBar() {
 
-  const { carData, setCarData, data } = useContext(CarContext);
+  const { setCarData, data } = useContext(CarContext);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [search, setSearch] = useState("");
@@ -40,14 +40,14 @@ export default function SearchBar() {
         alignItems: "center",
         justifyContent: "center",
         minWidth: "150px",
-        marginRight: {xs:"0px", sm: "0px", md: "0px", xl: "clamp(20px, 6.8vw, 113px)"},
-        width: {xs: "85%", sm: "85%", md: "370px", lg: "450px", xl: "clamp(150px, 21vw, 450px)"}, 
+        marginRight: { xs: "0px", sm: "0px", md: "0px", xl: "clamp(20px, 6.8vw, 113px)" },
+        width: { xs: "85%", sm: "85%", md: "370px", lg: "450px", xl: "clamp(150px, 21vw, 450px)" },
       }}
     >
       <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
         <SearchIcon />
       </IconButton>
-      <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search" onChange={handleSearch}/>
+      <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search" onChange={handleSearch} />
     </Paper>
   );
 }

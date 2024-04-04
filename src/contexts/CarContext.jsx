@@ -1,15 +1,16 @@
 import { createContext, useState, useEffect } from "react";
+
 import axios from "axios";
-import React from "react";
 import api from "../lib/api/api";
 
 export const CarContext = createContext();
 
 function Provider({ children }) {
+
   const [data, setData] = useState([]);
   const [carData, setCarData] = useState(data);
-  const [brandData, setBrandData] = useState(data);
-  const [modelData, setModelData] = useState(data);
+  const [brandData, setBrandData] = useState([]);
+  const [modelData, setModelData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartProducts, setCartProducts] = useState([]);
   const [product, setProduct] = useState({});
@@ -18,48 +19,19 @@ function Provider({ children }) {
 
   const fetchData = () => {
     axios.get(api)
-      .then(response => response.data)
-      .then(data => {
+      .then(({ data }) => {
         setData(data);
         setCarData(data);
-        setBrandData(Array.from(new Set(data.map((car) => car.brand))));
-        setModelData(Array.from(new Set(data.map((car) => car.model))));
+        setBrandData(Array.from(new Set(data.map(({ brand }) => brand))));
+        setModelData(Array.from(new Set(data.map(({ model }) => model))));
       })
-      .catch(error => console.log(error))
+      .catch(error => console.error(error))
       .finally(() => setIsLoading(false));
   };
 
-
-
-  function addAndCount(newCartProduct) {
-    const isSameID = cartProducts.some(
-      (object) => object.id === newCartProduct.id
-    );
-    if (isSameID) {
-      const updatedList = cartProducts.map((object) =>
-        object.id === newCartProduct.id
-          ? { ...object, count: object.count + 1 }
-          : object
-      );
-      setCartProducts(updatedList);
-    } else {
-      const updatedList = [...cartProducts, { ...newCartProduct, count: 1 }];
-      setCartProducts(updatedList);
-    }
-  }
-
-  function getProduct(image, name, price, description, id) {
-    const newProduct = { image, name, price, description, id };
-    setProduct(newProduct);
-  }
-
-  function addToCart(price, name, count, id) {
-    const newCartProduct = { name, price, count, id };
-    setTotalPrice(totalPrice + parseInt(price));
-    addAndCount(newCartProduct);
-  }
-
   useEffect(() => {
+    fetchData();
+
     const storedCartProducts = localStorage.getItem("cartProducts");
     const storedTotalPrice = localStorage.getItem("totalPrice");
 
@@ -77,42 +49,51 @@ function Provider({ children }) {
     localStorage.setItem("totalPrice", totalPrice);
   }, [cartProducts, totalPrice]);
 
+
   const valueToShare = {
     data,
-    setData,
-    brandData,
-    setBrandData,
     carData,
-    setCarData,
     fetchData,
-    totalPrice,
-    setTotalPrice,
-    brandSearch,
-    setBrandSearch,
-    modelSearch,
-    setModelSearch,
+    setCarData,
+    brandData,
     modelData,
     setModelData,
-    productCount,
-    setProductCount,
+    totalPrice,
+    setTotalPrice,
     cartProducts,
     setCartProducts,
-    isVisible,
-    setIsVisible,
     product,
-    setProduct,
     addAndCount,
     getProduct,
     addToCart,
-    isClicked,
-    setIsClicked,
-    filteredCarData, 
-    setFilteredCarData,
-    selected, 
+    selected,
     setSelected,
-    isLoading, 
-    setIsLoading
+    isLoading,
   };
+
+
+
+  function addAndCount(newCartProduct) {
+    const existingProduct = cartProducts.find(({ id }) => id === newCartProduct.id);
+    if (existingProduct) {
+      const updatedList = cartProducts.map(object =>
+        object.id === newCartProduct.id ? { ...object, count: object.count + 1 } : object
+      );
+      setCartProducts(updatedList);
+    } else {
+      setCartProducts(cartProducts => [...cartProducts, { ...newCartProduct, count: 1 }]);
+    }
+  }
+
+  function getProduct(image, name, price, description, id) {
+    setProduct({ image, name, price, description, id });
+  }
+
+  function addToCart(price, name, count, id) {
+    const newCartProduct = { name, price, count, id };
+    setTotalPrice(totalPrice + parseInt(price));
+    addAndCount(newCartProduct);
+  }
 
   return (
     <CarContext.Provider value={valueToShare}>{children}</CarContext.Provider>
@@ -122,3 +103,5 @@ function Provider({ children }) {
 export { Provider };
 
 export default CarContext;
+
+
