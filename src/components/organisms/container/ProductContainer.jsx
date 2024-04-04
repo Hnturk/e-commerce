@@ -3,13 +3,6 @@ import Grid from "@mui/material/Unstable_Grid2";
 import ProductDetail from "./containerProduct/ProductDetail";
 import ShopBar from "./containerContent/ShopBar";
 import Typography from "@mui/material/Typography";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import Drawer from "@mui/material/Drawer";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
@@ -19,7 +12,7 @@ import CartItem from "../../atoms/CartItem";
 import List from "@mui/material/List";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CarContext from "../../../contexts/CarContext";
-import Checkout from "../../molecules/Checkout";
+
 
 function ProductContainer() {
   const { product, totalPrice, cartProducts } = useContext(CarContext);

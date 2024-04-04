@@ -55,12 +55,13 @@ export default function SortFilter() {
         <FormLabel id="BrandFİlter">Sort</FormLabel>
         <RadioGroup>
           {options.map((option) => (
-            <FormControlLabel
-            value={option.value}
-            control={<Radio 
-            checked = {option.value === selectedValue}
-            onChange={() => handleClick(option.value)} />}
-            label={option.label} />
+            <FormControlLabel 
+              key={option.value} // Add key prop
+              value={option.value}
+              control={<Radio 
+                checked={option.value === selectedValue}
+                onChange={() => handleClick(option.value)} />}
+              label={option.label} />
           ))}
         </RadioGroup>
       </FormControl>

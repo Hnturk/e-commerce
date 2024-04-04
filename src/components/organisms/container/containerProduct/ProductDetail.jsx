@@ -1,13 +1,12 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Button, CardActions } from "@mui/material";
 import CarContext from "../../../../contexts/CarContext";
 function ProductDetail({ car }) {
   const { addToCart, cartProducts } = useContext(CarContext);
@@ -137,7 +136,6 @@ function ProductDetail({ car }) {
               width: {
                 xs: "300px",
                 sm: "400px",
-                xs: "400px",
                 md: "400px",
                 lg: "370px",
                 xl: "370px",
@@ -145,7 +143,6 @@ function ProductDetail({ car }) {
               height: {
                 xs: "30px",
                 sm: "40px",
-                xs: "40px",
                 md: "40px",
                 lg: "60px",
                 xl: "60px",

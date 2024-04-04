@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useMemo } from "react";
+import { useContext, useState, useEffect } from "react";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import CarContext from "../../contexts/CarContext";
 
 function ModelFilter() {
-  const { setCarData, data, modelData, carData, brandData, selected } = useContext(CarContext);
+  const { setCarData, data, modelData, carData, selected } = useContext(CarContext);
   const [query, setQuery] = useState("");
   const [selectedModels, setSelectedModels] = useState(new Set());
 

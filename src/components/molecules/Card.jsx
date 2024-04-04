@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useContext } from 'react';
+import {  useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -18,12 +18,16 @@ export default function ProductCard({ car }) {
   const isClicked = cartProducts.find((e) => e.id === car.id) ? true : false;
 
   function handleClick() {
-    addToCart(car.price, car?.name, car.count, car.id)
+    if (car) {
+      addToCart(car.price, car?.name, car.count, car.id);
+    }
   }
 
   function handleToggleClick() {
-    navigate("/product");
-    getProduct(car?.image, car?.name, car?.price, car?.description, car?.id);
+    if (car) {
+      navigate("/product");
+      getProduct(car?.image, car?.name, car?.price, car?.description, car?.id);
+    }
   }
 
   return (

@@ -82,7 +82,7 @@ function Navbar() {
         lg={3}
         xl={3.6}
       >
-        <div style={{display: {xs: "flex", md: "flex", md: "none", lg: "none", xl: "none" }, }}>
+        <div style={{display: {xs: "flex", sm: "flex", md: "none", lg: "none", xl: "none" }, }}>
       <Button
         sx={{minWidth: {xs: "64xp", sm: "0px", md: "0px", lg: "0px", xl: "0px"}}}
         id="basic-button"
@@ -91,7 +91,7 @@ function Navbar() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <MenuIcon sx={{ display: {xs: "block", md: "block", md: "none", lg: "none", xl: "none" }, color: "white", height: "40px", width: "40px"}}/>
+        <MenuIcon sx={{ display: {xs: "block", sm: "block", md: "none", lg: "none", xl: "none" }, color: "white", height: "40px", width: "40px"}}/>
       </Button>
       <Menu
         id="basic-menu"
