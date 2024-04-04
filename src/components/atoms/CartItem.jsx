@@ -8,10 +8,11 @@ import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRou
 import RemoveCircleOutlineRoundedIcon from "@mui/icons-material/RemoveCircleOutlineRounded";
 import CarContext from "../../contexts/CarContext";
 
-export default function CartItem({ item }) {
+export default function CartItem({ item }) { 
   const { cartProducts, setCartProducts, setTotalPrice } =
     useContext(CarContext);
 
+    
   const handleIncrease = (productID) => {
     const updatedList = cartProducts.map((object) =>
       object.id === productID ? { ...object, count: object.count + 1 } : object
