@@ -1,11 +1,16 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useMemo } from "react";
 
+import PropTypes from 'prop-types';
 import axios from "axios";
 import api from "../lib/api/api";
 
 export const CarContext = createContext();
 
 function Provider({ children }) {
+
+  Provider.propTypes = {
+    children: PropTypes.string.isRequired
+  };
 
   const [data, setData] = useState([]);
   const [carData, setCarData] = useState(data);
@@ -24,6 +29,10 @@ function Provider({ children }) {
         setCarData(data);
         setBrandData(Array.from(new Set(data.map(({ brand }) => brand))));
         setModelData(Array.from(new Set(data.map(({ model }) => model))));
+        // setBrandData(Array.from(new Set(data.map(({ brand, id }) => ({brand: brand,id: id })))));
+        // setModelData(Array.from(new Set(data.map(({ model, id }) => ({model: model,id: id })))));
+        // setBrandData(Array.from(new Set(data.map(({ brand }) => ({brand})))));
+        // setModelData(Array.from(new Set(data.map(({ model}) => ({model})))));
       })
       .catch(error => console.error(error))
       .finally(() => setIsLoading(false));

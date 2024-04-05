@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  useContext } from 'react';
+import { useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -8,19 +7,22 @@ import { Button, CardActionArea, CardActions} from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useNavigate } from "react-router-dom";
 import CarContext from '../../contexts/CarContext';
+import PropTypes from 'prop-types';
 
 export default function ProductCard({ car }) {
+
+  ProductCard.propTypes = {
+    car: PropTypes.object.isRequired,
+  };
 
   const { addToCart, cartProducts, getProduct} = useContext(CarContext);
 
   const navigate = useNavigate();
 
-  const isClicked = cartProducts.find((e) => e.id === car.id) ? true : false;
+  const isClicked = cartProducts.find((e) => e.id === car?.id) || false;
 
   function handleClick() {
-    if (car) {
-      addToCart(car.price, car?.name, car.count, car.id);
-    }
+      addToCart(car?.price, car?.name, car?.count, car?.id);
   }
 
   function handleToggleClick() {

@@ -15,14 +15,13 @@ function ModelFilter() {
     if (selectedModels.size > 0) {
       const filteredCarData = carData.filter((car) => selectedModels.has(car.model));
       setCarData(filteredCarData);
-    } else {
-      if (selected.size !== 0 && selectedModels.size === 0) {
+    } else if (selected.size !== 0 && selectedModels.size === 0) {
       const filteredCarData = data.filter((car) => selected.has(car.brand));
       setCarData(filteredCarData);
     } else if (selected.size === 0 && selectedModels.size === 0) {
       setCarData(data);
-    }}
-  }, [selectedModels]);
+    }
+  }, [carData, data, selected, selectedModels, setCarData]);
 
   function handleModelSelection(model) {
       selectedModels.has(model) ? selectedModels.delete(model) : selectedModels.add(model);
@@ -33,8 +32,8 @@ function ModelFilter() {
       setQuery(event.target.value.toLowerCase());
   }
 
-  
-  const filteredModels = query ? modelData.filter((model) => model.toLowerCase().includes(query)) : modelData;
+  console.log(modelData);
+  const filteredModels = query ? modelData.filter((model) => model.toLowerCase().includes(query))  : modelData;
  
   
   return (
@@ -46,9 +45,9 @@ function ModelFilter() {
         onChange={handleModelSearch}
       />
       <FormGroup row sx={{ marginLeft: 2, overflowY: "auto", maxHeight: 120 }}>
-        {filteredModels.map((model, index) => (
+        {filteredModels.map((model, key) => ( 
           <FormControlLabel
-            key={index}
+            key={key}
             sx={{ minWidth: "150px" }}
             control={
               <Checkbox 

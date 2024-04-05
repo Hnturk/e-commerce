@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext } from "react";
+import { useContext, React } from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
@@ -8,10 +7,19 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions } from "@mui/material";
 import CarContext from "../../../../contexts/CarContext";
+import PropTypes from "prop-types";
+
+
+
 function ProductDetail({ car }) {
+
+  ProductDetail.propTypes = {
+    car: PropTypes.object.isRequired,
+  };
+
   const { addToCart, cartProducts } = useContext(CarContext);
 
-  const isClicked = cartProducts.find((e) => e.id === car.id) ? true : false;
+  const isClicked = cartProducts.find((e) => e.id === car.id) || false;
 
   function handleClick() {
     addToCart(car?.price, car?.name, car?.count, car?.id);
