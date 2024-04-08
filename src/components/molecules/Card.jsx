@@ -39,6 +39,7 @@ export default function ProductCard({ car }) {
           height="120"
           image={car?.image}
           loading="lazy"
+          testid="car-image"
         />
         <CardContent sx={{ padding: "16px 5px" }}>
           <Typography

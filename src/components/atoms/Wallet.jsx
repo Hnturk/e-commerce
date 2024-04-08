@@ -16,7 +16,7 @@ function Wallet() {
       underline="none"
       color= "#fff"
     >
-      <AccountBalanceWalletOutlinedIcon />
+      <AccountBalanceWalletOutlinedIcon data-testid="wallet-icon"/>
       <Typography variant="h6" color="white">
           ${totalPrice}
       </Typography>
