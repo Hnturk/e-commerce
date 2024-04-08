@@ -7,6 +7,7 @@ import Paper from "@mui/material/Paper";
 import CarContext from "../../contexts/CarContext";
 
 function ModelFilter() {
+
   const { setCarData, data, modelData, carData, selected } =
     useContext(CarContext);
   const [query, setQuery] = useState("");
@@ -14,7 +15,7 @@ function ModelFilter() {
 
   useEffect(() => {
     if (selectedModels.size > 0) {
-      const filteredCarData = carData.filter((car) =>
+      const filteredCarData = data.filter((car) =>
         selectedModels.has(car.model)
       );
       setCarData(filteredCarData);
@@ -32,6 +33,7 @@ function ModelFilter() {
       : selectedModels.add(model);
     setSelectedModels(new Set(selectedModels));
   }
+  console.log(selectedModels)
 
   function handleModelSearch(event) {
     setQuery(event.target.value.toLowerCase());
