@@ -27,13 +27,14 @@ function Provider({ children }) {
       .then(({ data }) => {
         setData(data);
         setCarData(data);
-        setBrandData(Array.from(new Set(data.map((car) => ({ brand: car.brand, id: car.id })))));
-        setModelData(Array.from(new Set(data.map((car) => ({ model: car.model, id: car.id })))));
+        setBrandData(Array.from(new Set(data.map(({ brand }) => brand ))));
+        setModelData(Array.from(new Set(data.map(({ model }) => model))));
       })
       .catch(error => console.error(error))
       .finally(() => setIsLoading(false));
   }, []);
 
+  console.log(modelData)
   useEffect(() => {
     fetchData();
 
