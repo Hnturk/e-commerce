@@ -14,7 +14,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 
-function Navbar() {
+function NavbarC() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -182,5 +182,6 @@ function Navbar() {
     </Grid>
   );
 }
-
+const Navbar = React.memo(NavbarC);
 export default Navbar;
+
