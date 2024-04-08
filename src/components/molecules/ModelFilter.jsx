@@ -32,8 +32,7 @@ function ModelFilter() {
       setQuery(event.target.value.toLowerCase());
   }
 
-  console.log(modelData);
-  const filteredModels = query ? modelData.filter((model) => model.toLowerCase().includes(query))  : modelData;
+  const filteredModels = query ? modelData.filter((car) => car.model.toLowerCase().includes(query))  : modelData;
  
   
   return (
@@ -45,16 +44,16 @@ function ModelFilter() {
         onChange={handleModelSearch}
       />
       <FormGroup row sx={{ marginLeft: 2, overflowY: "auto", maxHeight: 120 }}>
-        {filteredModels.map((model, key) => ( 
+        {filteredModels.map((car) => ( 
           <FormControlLabel
-            key={key}
+            key={car.id}
             sx={{ minWidth: "150px" }}
             control={
               <Checkbox 
-              onChange={() => handleModelSelection(model)} 
-              checked={selectedModels.has(model)} />
+              onChange={() => handleModelSelection(car.model)} 
+              checked={selectedModels.has(car.model)} />
             }
-            label={model}
+            label={car.model}
           />
         ))}
       </FormGroup>

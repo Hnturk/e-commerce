@@ -27,12 +27,9 @@ function Provider({ children }) {
       .then(({ data }) => {
         setData(data);
         setCarData(data);
-        setBrandData(Array.from(new Set(data.map(({ brand }) => brand))));
-        setModelData(Array.from(new Set(data.map(({ model }) => model))));
-        // setBrandData(Array.from(new Set(data.map(({ brand, id }) => ({brand: brand,id: id })))));
-        // setModelData(Array.from(new Set(data.map(({ model, id }) => ({model: model,id: id })))));
-        // setBrandData(Array.from(new Set(data.map(({ brand }) => ({brand})))));
-        // setModelData(Array.from(new Set(data.map(({ model}) => ({model})))));
+        setBrandData(Array.from(new Set(data.map(( car ) => ({brand: car.brand, id: car.id })))));
+        setModelData(Array.from(new Set(data.map(( car ) => ({ model: car.model, id: car.id })))));
+
       })
       .catch(error => console.error(error))
       .finally(() => setIsLoading(false));
@@ -59,7 +56,7 @@ function Provider({ children }) {
   }, [cartProducts, totalPrice]);
 
 
-  const valueToShare = {
+  const valueToShare = useMemo(() => ({
     data,
     carData,
     fetchData,
@@ -78,9 +75,7 @@ function Provider({ children }) {
     selected,
     setSelected,
     isLoading,
-  };
-
-
+  }), [data, carData, fetchData, setCarData, brandData, modelData, setModelData, totalPrice, setTotalPrice, cartProducts, setCartProducts, product, addAndCount, getProduct, addToCart, selected, setSelected, isLoading]);
 
   function addAndCount(newCartProduct) {
     const existingProduct = cartProducts.find(({ id }) => id === newCartProduct.id);

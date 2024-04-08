@@ -96,9 +96,9 @@ function MainContent() {
           }}
           container
         >
-          {currentItems?.map((item, index) => (
+          {currentItems?.map((item) => (
             <Grid
-              key={index}
+              key={item.id}
               sx={{
                 minWidth: "185px",
                 height: "260px",
@@ -113,7 +113,7 @@ function MainContent() {
               lg={4}
               xl={3}
             >
-              <Card key={item?.id} car={item} />
+              {item && <Card key={item?.id} car={item} />}
             </Grid>
           ))}
         </Grid>
