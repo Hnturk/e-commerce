@@ -32,7 +32,7 @@ export default function BrandFilter() {
       const originalModels = Array.from(new Set(data.map((car) => ({model: car.model, id: car.id}))));
       setModelData(originalModels);
     }
-  };
+  }; 
 
   const handleBrandSelection = (brand) => {
     const updatedSelected = new Set(selected);

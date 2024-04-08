@@ -5,18 +5,3 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-:root {
-  --shade: #f5f5f5;
-  --text: #5a5a5a;
-  --light: #fff;
-  --light100: #ffffff1b;
-  --dark: #000;
-  --ocean: #007fff;
-  --grass: #7cfc00;
-
-  --gap: 10px;
-  --gap2x: 20px;
-
-  --shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-}

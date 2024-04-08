@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useMemo } from "react";
+import { createContext, useState, useEffect, useMemo, useCallback } from "react";
 
 import PropTypes from 'prop-types';
 import axios from "axios";
@@ -22,18 +22,17 @@ function Provider({ children }) {
   const [selected, setSelected] = useState(new Set());
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     axios.get(api)
       .then(({ data }) => {
         setData(data);
         setCarData(data);
-        setBrandData(Array.from(new Set(data.map(( car ) => ({brand: car.brand, id: car.id })))));
-        setModelData(Array.from(new Set(data.map(( car ) => ({ model: car.model, id: car.id })))));
-
+        setBrandData(Array.from(new Set(data.map((car) => ({ brand: car.brand, id: car.id })))));
+        setModelData(Array.from(new Set(data.map((car) => ({ model: car.model, id: car.id })))));
       })
       .catch(error => console.error(error))
       .finally(() => setIsLoading(false));
-  };
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -48,13 +47,35 @@ function Provider({ children }) {
     if (storedTotalPrice) {
       setTotalPrice(parseFloat(storedTotalPrice));
     }
-  }, []);
+  }, [fetchData]);
 
   useEffect(() => {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
     localStorage.setItem("totalPrice", totalPrice);
   }, [cartProducts, totalPrice]);
 
+
+  const addAndCount = useCallback((newCartProduct) => {
+    const existingProduct = cartProducts.find(({ id }) => id === newCartProduct.id);
+    if (existingProduct) {
+      const updatedList = cartProducts.map(object =>
+        object.id === newCartProduct.id ? { ...object, count: object.count + 1 } : object
+      );
+      setCartProducts(updatedList);
+    } else {
+      setCartProducts(cartProducts => [...cartProducts, { ...newCartProduct, count: 1 }]);
+    }
+  }, [cartProducts]);
+
+  const getProduct = useCallback((image, name, price, description, id) => {
+    setProduct({ image, name, price, description, id });
+  }, [setProduct]);
+
+  const addToCart = useCallback((price, name, count, id) => {
+    const newCartProduct = { name, price, count, id };
+    setTotalPrice(totalPrice => totalPrice + parseInt(price));
+    addAndCount(newCartProduct);
+  }, [setTotalPrice, addAndCount]);
 
   const valueToShare = useMemo(() => ({
     data,
@@ -75,29 +96,9 @@ function Provider({ children }) {
     selected,
     setSelected,
     isLoading,
-  }), [data, carData, fetchData, setCarData, brandData, modelData, setModelData, totalPrice, setTotalPrice, cartProducts, setCartProducts, product, addAndCount, getProduct, addToCart, selected, setSelected, isLoading]);
-
-  function addAndCount(newCartProduct) {
-    const existingProduct = cartProducts.find(({ id }) => id === newCartProduct.id);
-    if (existingProduct) {
-      const updatedList = cartProducts.map(object =>
-        object.id === newCartProduct.id ? { ...object, count: object.count + 1 } : object
-      );
-      setCartProducts(updatedList);
-    } else {
-      setCartProducts(cartProducts => [...cartProducts, { ...newCartProduct, count: 1 }]);
-    }
-  }
-
-  function getProduct(image, name, price, description, id) {
-    setProduct({ image, name, price, description, id });
-  }
-
-  function addToCart(price, name, count, id) {
-    const newCartProduct = { name, price, count, id };
-    setTotalPrice(totalPrice + parseInt(price));
-    addAndCount(newCartProduct);
-  }
+  }), [data, carData, fetchData, setCarData, brandData, modelData, setModelData, 
+    totalPrice, setTotalPrice, cartProducts, setCartProducts, product, addAndCount, 
+    getProduct, addToCart, selected, setSelected, isLoading]);
 
   return (
     <CarContext.Provider value={valueToShare}>{children}</CarContext.Provider>

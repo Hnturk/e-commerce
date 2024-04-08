@@ -52,11 +52,11 @@ export default function SortFilter() {
   return (
     <Paper sx={{ minWidth: "190px", width: "50%", height: "200px" }}>
       <FormControl sx={{ paddingLeft: "10px" }}>
-        <FormLabel id="BrandFİlter">Sort</FormLabel>
+        <FormLabel id="BrandFilter">Sort</FormLabel>
         <RadioGroup>
           {options.map((option) => (
             <FormControlLabel 
-              key={option.value} // Add key prop
+              key={option.value} 
               value={option.value}
               control={<Radio 
                 checked={option.value === selectedValue}

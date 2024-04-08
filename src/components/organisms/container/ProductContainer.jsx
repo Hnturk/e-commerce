@@ -13,7 +13,6 @@ import List from "@mui/material/List";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CarContext from "../../../contexts/CarContext";
 
-
 function ProductContainer() {
   const { product, totalPrice, cartProducts } = useContext(CarContext);
 
@@ -83,7 +82,7 @@ function ProductContainer() {
                 }}
               >
                 <Paper
-                elevation={9}
+                  elevation={9}
                   sx={{
                     width: "80%",
                     display: "flex",
