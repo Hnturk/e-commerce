@@ -1,4 +1,5 @@
-import { useContext, React } from "react";
+import { useContext } from "react";
+import React from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
@@ -6,7 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions } from "@mui/material";
-import CarContext from "../../../../contexts/CarContext";
+import CarContext from "../../../../contexts/CarContext.jsx";
 import PropTypes from "prop-types";
 
 function ProductDetail({ car }) {
@@ -16,7 +17,7 @@ function ProductDetail({ car }) {
 
   const { addToCart, cartProducts } = useContext(CarContext);
 
-  const isClicked = cartProducts.find((e) => e.id === car.id) || false;
+  const isClicked = car && (cartProducts.find((e) => e.id === car.id) || false);
 
   function handleClick() {
     addToCart(car?.price, car?.name, car?.count, car?.id);
@@ -24,6 +25,7 @@ function ProductDetail({ car }) {
 
   return (
     <Card
+      data-testid = "product-detail"
       raised={true}
       sx={{
         minWidth: "185px",
@@ -148,6 +150,7 @@ function ProductDetail({ car }) {
           }}
         >
           <Button
+            data-testid = "add-to-cart"
             className={isClicked ? "" : "button"}
             sx={{
               width: {

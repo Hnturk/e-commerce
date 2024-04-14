@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
+import React from 'react';
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Paper from "@mui/material/Paper";
-import CarContext from "../../contexts/CarContext";
+import CarContext from "../../contexts/CarContext.jsx";
 
 const options = [
   { label: "Old to New", value: "oldToNew" },
@@ -50,7 +51,7 @@ export default function SortFilter() {
   } 
 
   return (
-    <Paper sx={{ minWidth: "190px", width: "50%", height: "200px" }}>
+    <Paper data-testid="sort-filter" sx={{ minWidth: "190px", width: "50%", height: "200px" }}>
       <FormControl sx={{ paddingLeft: "10px" }}>
         <FormLabel id="BrandFilter">Sort</FormLabel>
         <RadioGroup>

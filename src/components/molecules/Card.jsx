@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import React from 'react';
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -6,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useNavigate } from "react-router-dom";
-import CarContext from "../../contexts/CarContext";
+import CarContext from "../../contexts/CarContext.jsx";
 import PropTypes from "prop-types";
 
 export default function ProductCard({ car }) {
@@ -32,8 +33,8 @@ export default function ProductCard({ car }) {
   }
 
   return (
-    <Card raised={true} className="card">
-      <CardActionArea onClick={handleToggleClick}>
+    <Card data-testid = "car-card" raised={true} className="card">
+      <CardActionArea data-testid= "card-action" onClick={handleToggleClick}>
         <CardMedia
           component="img"
           height="120"
@@ -43,6 +44,7 @@ export default function ProductCard({ car }) {
         />
         <CardContent sx={{ padding: "16px 5px" }}>
           <Typography
+            data-testid = "car-price"
             gutterBottom
             variant="h5"
             component="div"
@@ -51,7 +53,7 @@ export default function ProductCard({ car }) {
           >
             {car?.price}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography data-testid = "car-name" variant="body2" color="text.secondary">
             {car?.name}
           </Typography>
         </CardContent>
@@ -60,6 +62,7 @@ export default function ProductCard({ car }) {
         style={{ display: "flex", justifyContent: "center", padding: 0 }}
       >
         <Button
+          data-testid="add-to-cart"
           className={isClicked ? "" : "button"}
           sx={{ fontSize: "clamp(12px, 0.72vw, 15px)" }}
           size="medium"

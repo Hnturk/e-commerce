@@ -1,57 +1,67 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { CarContext } from "../../../contexts/CarContext";
 import SortFilter from "../../../components/molecules/SortFilter";
+import CarContext from "../../../contexts/CarContext";
 
 describe("SortFilter component", () => {
-  const mockCarData = [
-    { createdAt: "2022-01-01", price: "10000" },
-    { createdAt: "2021-01-01", price: "20000" },
-    { createdAt: "2023-01-01", price: "15000" },
-  ];
-  const mockSetCarData = jest.fn();
+  test("renders SortFilter component correctly", () => {
+    render(
+      <CarContext.Provider value={{ carData: [], setCarData: jest.fn() }}>
+        <SortFilter />
+      </CarContext.Provider>
+    );
 
-  const mockContext = {
-    carData: mockCarData,
-    setCarData: mockSetCarData,
-  };
-
-  test("renders the sort options", () => {
-    try {
-      render(
-        <CarContext.Provider value={mockContext}>
-          <SortFilter />
-        </CarContext.Provider>
-      );
-
-      const sortOptions = screen.getAllByRole("radio");
-      expect(sortOptions.length).toBe(4);
-    } catch (e) {
-      console.log(e);
-    }
+    const sortFilterComponent = screen.getByTestId("sort-filter");
+    expect(sortFilterComponent).toBeInTheDocument();
   });
 
-  test("sorts data by 'Old to New' option", () => {
-    try {
-      render(
-        <CarContext.Provider value={mockContext}>
-          <SortFilter />
-        </CarContext.Provider>
-      );
+  test("changes selected value and sorts car data correctly", () => {
+    const carData = [
+      { createdAt: "2022-01-01", price: "10000" },
+      { createdAt: "2021-01-01", price: "20000" },
+      { createdAt: "2023-01-01", price: "15000" },
+    ];
+    const setCarDataMock = jest.fn();
 
-      const oldToNewOption = screen.getByLabelText("Old to New");
-      fireEvent.click(oldToNewOption);
+    render(
+      <CarContext.Provider value={{ carData, setCarData: setCarDataMock }}>
+        <SortFilter />
+      </CarContext.Provider>
+    );
 
-      expect(mockSetCarData).toHaveBeenCalledWith([
-        { createdAt: "2021-01-01", price: "20000" },
-        { createdAt: "2022-01-01", price: "10000" },
-        { createdAt: "2023-01-01", price: "15000" },
-      ]);
-    } catch (e) {
-      console.log(e);
-    }
+    const radioButtons = screen.getAllByRole("radio");
+
+    fireEvent.click(radioButtons[0]);
+
+    expect(setCarDataMock).toHaveBeenCalledWith([
+      { createdAt: "2021-01-01", price: "20000"  },
+      { createdAt: "2022-01-01", price: "10000" },
+      { createdAt: "2023-01-01", price: "15000" },
+    ]);
+
+    fireEvent.click(radioButtons[1]);
+
+    expect(setCarDataMock).toHaveBeenCalledWith([
+      { createdAt: "2023-01-01", price: "15000" },
+      { createdAt: "2022-01-01", price: "10000" },
+      { createdAt: "2021-01-01", price: "20000" },
+    ]);
+
+
+    fireEvent.click(radioButtons[2]);
+  
+    expect(setCarDataMock).toHaveBeenCalledWith([
+      { createdAt: "2021-01-01", price: "20000" },
+      { createdAt: "2023-01-01", price: "15000" },
+      { createdAt: "2022-01-01", price: "10000" },
+    ]);
+
+    fireEvent.click(radioButtons[3]);
+  
+    expect(setCarDataMock).toHaveBeenCalledWith([
+      { createdAt: "2022-01-01", price: "10000" },
+      { createdAt: "2023-01-01", price: "15000" },
+      { createdAt: "2021-01-01", price: "20000" },
+    ]);
   });
-
-  // Add tests for other sort options (New to Old, Price high to low, Price low to high) in a similar manner
-
 });

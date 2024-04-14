@@ -1,5 +1,6 @@
-import { useState, useContext, useEffect } from "react";
 import Paper from "@mui/material/Paper";
+import React from "react";
+import { useState, useContext, useEffect } from "react";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
@@ -11,13 +12,7 @@ export default function SearchBar() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [search, setSearch] = useState("");
 
-  function handleMouse() {
-    setIsExpanded(!isExpanded);
-  }
 
-  function handleSearch(event) {
-    setSearch(event.target.value.toLowerCase());
-  }
 
   useEffect(() => {
     search
@@ -29,6 +24,7 @@ export default function SearchBar() {
 
   return (
     <Paper
+      data-testid = "search-bar"
       onMouseEnter={handleMouse}
       onMouseLeave={handleMouse}
       elevation={1}
@@ -54,4 +50,12 @@ export default function SearchBar() {
       />
     </Paper>
   );
+
+  function handleMouse() {
+    setIsExpanded(!isExpanded);
+  }
+
+  function handleSearch(event) {
+    setSearch(event.target.value.toLowerCase());
+  }
 }

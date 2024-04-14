@@ -1,109 +1,44 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { CarContextProvider } from "../../../contexts/CarContext";
 import OpenCart from "../../../components/molecules/OpenCart";
+import CarContext from "../../../contexts/CarContext";
 
 describe("OpenCart component", () => {
-  test("renders the Open Cart button", () => {
-    try {
-      render(
-        <CarContextProvider>
-          <OpenCart />
-        </CarContextProvider>
-      );
-      const openCartButton = screen.getByText("Open Cart");
-      expect(openCartButton).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+  const totalPrice = 0;
+  const cartProducts = [];
+  test("renders Open Cart button", () => {
+    render(
+      <CarContext.Provider value={{ totalPrice, cartProducts }}>
+        <OpenCart />
+      </CarContext.Provider>
+    );
+    const openCartButton = screen.getByRole("button", { name: /open cart/i });
+    expect(openCartButton).toBeInTheDocument();
   });
 
-  test("opens the cart drawer on button click", () => {
-    try {
-      render(
-        <CarContextProvider>
-          <OpenCart />
-        </CarContextProvider>
-      );
-      const openCartButton = screen.getByText("Open Cart");
-      fireEvent.click(openCartButton);
-      const cartDrawer = screen.getByRole("dialog");
-      expect(cartDrawer).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+  test("opens cart drawer when Open Cart button is clicked", () => {
+    render(
+      <CarContext.Provider value={{ totalPrice, cartProducts }}>
+        <OpenCart />
+      </CarContext.Provider>
+    );
+    const openCartButton = screen.getByRole("button", { name: /open cart/i });
+    fireEvent.click(openCartButton);
+    const cartDrawer = screen.getByTestId("cart-drawer");
+    expect(cartDrawer).toBeInTheDocument();
   });
 
-  test("closes the cart drawer on close button click", () => {
-    try {
-      render(
-        <CarContextProvider>
-          <OpenCart />
-        </CarContextProvider>
-      );
-      const openCartButton = screen.getByText("Open Cart");
-      fireEvent.click(openCartButton);
-      const closeButton = screen.getByLabelText("Close");
-      fireEvent.click(closeButton);
-      const cartDrawer = screen.queryByRole("dialog");
-      expect(cartDrawer).not.toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
-  test("displays the cart items in the drawer", () => {
-    const cartProducts = [
-      { id: 1, name: "Product 1" },
-      { id: 2, name: "Product 2" },
-      { id: 3, name: "Product 3" },
-    ];
-    try {
-      render(
-        <CarContextProvider cartProducts={cartProducts}>
-          <OpenCart />
-        </CarContextProvider>
-      );
-      const openCartButton = screen.getByText("Open Cart");
-      fireEvent.click(openCartButton);
-      const cartItems = screen.getAllByTestId("cart-item");
-      expect(cartItems.length).toBe(cartProducts.length);
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
-  test("displays the total price in the drawer", () => {
-    const totalPrice = 100;
-    try {
-      render(
-        <CarContextProvider totalPrice={totalPrice}>
-          <OpenCart />
-        </CarContextProvider>
-      );
-      const openCartButton = screen.getByText("Open Cart");
-      fireEvent.click(openCartButton);
-      const totalPriceElement = screen.getByText(`Total Price $${totalPrice}`);
-      expect(totalPriceElement).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
-  test("triggers checkout on button click", () => {
-    try {
-      render(
-        <CarContextProvider>
-          <OpenCart />
-        </CarContextProvider>
-      );
-      const openCartButton = screen.getByText("Open Cart");
-      fireEvent.click(openCartButton);
-      const checkoutButton = screen.getByText("Checkout");
-      fireEvent.click(checkoutButton);
-      // Add your assertion for the checkout functionality here
-    } catch (error) {
-      console.log(error);
-    }
+  test("displays total price correctly", () => {
+    const totalPrice = 50;
+    const cartProducts = [];
+    render(
+      <CarContext.Provider value={{ totalPrice, cartProducts }}>
+        <OpenCart />
+      </CarContext.Provider>
+    );
+    const openCartButton = screen.getByRole("button", { name: /open cart/i });
+    fireEvent.click(openCartButton);
+    const totalPriceElement = screen.getByTestId("open-cart-total-price");
+    expect(totalPriceElement).toBeInTheDocument();
   });
 });

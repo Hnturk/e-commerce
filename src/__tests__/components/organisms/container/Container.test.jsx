@@ -1,35 +1,81 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Container from "../../../../components/organisms/container/Container";
+import CarContext from "../../../../contexts/CarContext";
 
 describe("Container component", () => {
-  test("renders the FilterBar component", () => {
-    try {
-      render(<Container />);
-      const filterBar = screen.getByTestId("filter-bar");
-      expect(filterBar).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+
+  const mockCartProducts = [
+    {
+      id: 1,
+      name: "Product 1",
+      price: 100,
+      image: "image1",
+    },
+    {
+      id: 2,
+      name: "Product 2",
+      price: 200,
+      image: "image2",
+    },
+  ];
+
+  const mockData = [
+    {
+      id: 1,
+      name: "Product 1",
+      price: 100,
+      image: "image1",
+    },
+    {
+      id: 2,
+      name: "Product 2",
+      price: 200,
+      image: "image2",
+    },
+  ];
+
+  const mockSelected = new Set(["brand1", "brand2", "brand3"]);
+
+  const setCarData = jest.fn();
+  const setModelData = jest.fn();
+
+  const mockCarContext = {
+    isLoading: false,
+    cartProducts: mockCartProducts,
+    selected: mockSelected,
+    data: mockData,
+    setCarData,
+    setModelData,
+  };
+
+  test("renders FilterBar component", () => {
+    render(
+      <CarContext.Provider value={mockCarContext}>
+        <Container />
+      </CarContext.Provider>
+    );
+    const filterBarComponent = screen.getByTestId("filter-bar");
+    expect(filterBarComponent).toBeInTheDocument();
   });
 
-  test("renders the MainContent component", () => {
-    try {
-      render(<Container />);
-      const mainContent = screen.getByTestId("main-content");
-      expect(mainContent).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+  test("renders MainContent component", () => {
+    render(
+      <CarContext.Provider value={mockCarContext}>
+        <Container />
+      </CarContext.Provider>
+    );
+    const mainContentComponent = screen.getByTestId("main-content");
+    expect(mainContentComponent).toBeInTheDocument();
   });
 
-  test("renders the ShopBar component", () => {
-    try {
-      render(<Container />);
-      const shopBar = screen.getByTestId("shop-bar");
-      expect(shopBar).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+  test("renders ShopBar component", () => {
+    render(
+      <CarContext.Provider value={mockCarContext}>
+        <Container />
+      </CarContext.Provider>
+    );
+    const shopBarComponent = screen.getByTestId("shop-bar");
+    expect(shopBarComponent).toBeInTheDocument();
   });
 });

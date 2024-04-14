@@ -1,78 +1,78 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { CarContextProvider } from "../../../contexts/CarContext";
 import CartItem from "../../../components/atoms/CartItem";
+import CarContext from "../../../contexts/CarContext";
 
 describe("CartItem component", () => {
-  test("renders the item name and price", () => {
-    try {
-      const item = { id: 1, name: "Product 1", price: 10, count: 1 };
-      render(
-        <CarContextProvider>
-          <CartItem item={item} />
-        </CarContextProvider>
-      );
-      const itemName = screen.getByText("Product 1");
-      const itemPrice = screen.getByText("10");
-      expect(itemName).toBeInTheDocument();
-      expect(itemPrice).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  const mockCartProducts = [
+    { id: 1, name: "Test Product", price: 10, count: 2 },
+    { id: 2, name: "Test Product", price: 10, count: 2 },
+  ];
+  const mockCartItem = {
+    id: 1,
+    name: "Test Product",
+    price: 10,
+    count: 2,
+  };
 
-  test("increases the item count on button click", () => {
-    try {
-      const item = { id: 1, name: "Product 1", price: 10, count: 1 };
-      render(
-        <CarContextProvider>
-          <CartItem item={item} />
-        </CarContextProvider>
-      );
-      const increaseButton = screen.getByRole("button", {
-        name: /add circle outline rounded icon/i,
-      });
-      fireEvent.click(increaseButton);
-      const itemCount = screen.getByText("2");
-      expect(itemCount).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  const setCartProducts = jest.fn();
+  const setTotalPrice = jest.fn();
 
-  test("decreases the item count on button click", () => {
-    try {
-      const item = { id: 1, name: "Product 1", price: 10, count: 2 };
-      render(
-        <CarContextProvider>
-          <CartItem item={item} />
-        </CarContextProvider>
-      );
-      const decreaseButton = screen.getByRole("button", {
-        name: /remove circle outline rounded icon/i,
-      });
-      fireEvent.click(decreaseButton);
-      const itemCount = screen.getByText("1");
-      expect(itemCount).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  test("renders cart item with correct name and price", () => {
+    render(
+      <CarContext.Provider value={{}}>
+        <CartItem item={mockCartItem} />
+      </CarContext.Provider>
+    );
 
-  test("disables decrease button when item count is 0", () => {
-    try {
-      const item = { id: 1, name: "Product 1", price: 10, count: 0 };
-      render(
-        <CarContextProvider>
-          <CartItem item={item} />
-        </CarContextProvider>
-      );
-      const decreaseButton = screen.getByRole("button", {
-        name: /remove circle outline rounded icon/i,
-      });
-      expect(decreaseButton).toBeDisabled();
-    } catch (error) {
-      console.log(error);
-    }
+    const itemName = screen.getByText(mockCartItem.name);
+    const itemPrice = screen.getByText(mockCartItem.price);
+
+    expect(itemName).toBeInTheDocument();
+    expect(itemPrice).toBeInTheDocument();
+  });
+  test("calls handleIncrease when increase button is clicked", () => {
+    render(
+      <CarContext.Provider
+        value={{
+          setCartProducts,
+          cartProducts: mockCartProducts,
+          setTotalPrice,
+        }}
+      >
+        <CartItem item={mockCartItem} />
+      </CarContext.Provider>
+    );
+
+    const increaseButton = screen.getByTestId("increase-button");
+    fireEvent.click(increaseButton);
+
+    expect(setCartProducts).toHaveBeenCalledTimes(1);
+    expect(setCartProducts).toHaveBeenCalledWith([
+      { count: 3, id: 1, name: "Test Product", price: 10 },
+      { count: 2, id: 2, name: "Test Product", price: 10 },
+    ]);
+  });
+  test("calls handleDecrease when decrease button is clicked", () => {
+    render(
+      <CarContext.Provider
+        value={{
+          setCartProducts,
+          cartProducts: mockCartProducts,
+          setTotalPrice,
+        }}
+      >
+        <CartItem item={mockCartItem} />
+      </CarContext.Provider>
+    );
+
+    const decreaseButton = screen.getByTestId("decrease-button");
+    fireEvent.click(decreaseButton);
+
+    expect(setCartProducts).toHaveBeenCalledTimes(2);
+    expect(setCartProducts).toHaveBeenCalledWith([
+      { count: 1, id: 1, name: "Test Product", price: 10 },
+      { count: 2, id: 2, name: "Test Product", price: 10 },
+    ]);
   });
 });

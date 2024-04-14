@@ -1,57 +1,46 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { CarContextProvider } from "../../../contexts/CarContext";
 import SearchBar from "../../../components/atoms/SearchBar";
+import CarContext from "../../../contexts/CarContext";
 
 describe("SearchBar component", () => {
-  test("renders the search input", () => {
-    try {
-      render(
-        <CarContextProvider>
-          <SearchBar />
-        </CarContextProvider>
-      );
-      const searchInput = screen.getByPlaceholderText("Search");
-      expect(searchInput).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+  test("renders search input", () => {
+    render(
+      <CarContext.Provider value={{ setCarData: jest.fn(), data: [] }}>
+        <SearchBar />
+      </CarContext.Provider>
+    );
+    const searchInput = screen.getByPlaceholderText("Search");
+    expect(searchInput).toBeInTheDocument();
   });
 
-  test("updates the search value on input change", () => {
-    try {
-      render(
-        <CarContextProvider>
-          <SearchBar />
-        </CarContextProvider>
-      );
-      const searchInput = screen.getByPlaceholderText("Search");
-      fireEvent.change(searchInput, { target: { value: "audi" } });
-      expect(searchInput.value).toBe("audi");
-    } catch (error) {
-      console.log(error);
-    }
+  test("updates search value on input change", () => {
+    render(
+      <CarContext.Provider value={{ setCarData: jest.fn(), data: [] }}>
+        <SearchBar />
+      </CarContext.Provider>
+    );
+    const searchInput = screen.getByPlaceholderText("Search");
+    fireEvent.change(searchInput, { target: { value: "test" } });
+    expect(searchInput.value).toBe("test");
   });
 
-  test("filters the car data based on search input", () => {
-    const carData = [
-      { name: "Audi A4" },
-      { name: "BMW X5" },
-      { name: "Mercedes C-Class" },
+  test("filters car data based on search value", () => {
+    const mockCarData = [
+      { name: "Car 1" },
+      { name: "Car 2" },
+      { name: "Car 3" },
     ];
-    try {
-      render(
-        <CarContextProvider>
-          <SearchBar />
-        </CarContextProvider>
-      );
-      const searchInput = screen.getByPlaceholderText("Search");
-      fireEvent.change(searchInput, { target: { value: "bmw" } });
-      const filteredData = screen.getAllByTestId("car-item");
-      expect(filteredData.length).toBe(1);
-      expect(filteredData[0]).toHaveTextContent("BMW X5");
-    } catch (error) {
-      console.log(error);
-    }
+    const setCarDataMock = jest.fn();
+    render(
+      <CarContext.Provider
+        value={{ setCarData: setCarDataMock, data: mockCarData }}
+      >
+        <SearchBar />
+      </CarContext.Provider>
+    );
+    const searchInput = screen.getByPlaceholderText("Search");
+    fireEvent.change(searchInput, { target: { value: "car 2" } });
+    expect(setCarDataMock).toHaveBeenCalledWith([{ name: "Car 2" }]);
   });
 });

@@ -1,56 +1,53 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Navbar from "../../../../components/organisms/navbar/Navbar";
+import CarContext from "../../../../contexts/CarContext";
 
 describe("Navbar component", () => {
-  test("renders the logo", () => {
-    try {
-      render(<Navbar />);
-      const logo = screen.getByText("Eteration");
-      expect(logo).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+
+  const mockCarData = [
+    { name: "Car 1", brand: "Brand 1", model: "Model 1" },
+    { name: "Car 2", brand: "Brand 2", model: "Model 2" },] 
+
+  const setCarData = jest.fn();
+  const setAnchorEl = jest.fn();
+  test("renders logo", () => {
+    render(
+      <CarContext.Provider value={{ carData: mockCarData, setCarData, setAnchorEl }}>
+        <Navbar />
+      </CarContext.Provider>
+    );
+    const logoElement = screen.getByText("Eteration");
+    expect(logoElement).toBeInTheDocument();
   });
 
-  test("renders the search bar", () => {
-    try {
-      render(<Navbar />);
-      const searchBar = screen.getByRole("textbox", { name: "Search" });
-      expect(searchBar).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+  test("renders search bar", () => {
+    render(
+      <CarContext.Provider value={{ carData: mockCarData, setCarData, setAnchorEl }}>
+        <Navbar />
+      </CarContext.Provider>
+    );
+    const searchBarElement = screen.getByTestId("search-bar");
+    expect(searchBarElement).toBeInTheDocument();
   });
 
-  test("updates the search value on input change", () => {
-    try {
-      render(<Navbar />);
-      const searchBar = screen.getByRole("textbox", { name: "Search" });
-      fireEvent.change(searchBar, { target: { value: "audi" } });
-      expect(searchBar.value).toBe("audi");
-    } catch (error) {
-      console.log(error);
-    }
+  test("renders account icon", () => {
+        render(
+      <CarContext.Provider value={{ carData: mockCarData, setCarData, setAnchorEl }}>
+        <Navbar />
+      </CarContext.Provider>
+    );
+    const accountIconElement = screen.getByTestId("AccountCircleIcon");
+    expect(accountIconElement).toBeInTheDocument();
   });
 
-  test("renders the account icon", () => {
-    try {
-      render(<Navbar />);
-      const accountIcon = screen.getByRole("button", { name: "Profile" });
-      expect(accountIcon).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
-  test("renders the wallet icon", () => {
-    try {
-      render(<Navbar />);
-      const walletIcon = screen.getByRole("button", { name: "My account" });
-      expect(walletIcon).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+  test("renders wallet icon", () => {
+        render(
+      <CarContext.Provider value={{ carData: mockCarData, setCarData, setAnchorEl }}>
+        <Navbar />
+      </CarContext.Provider>
+    );
+    const walletIconElement = screen.getByTestId("wallet-icon");
+    expect(walletIconElement).toBeInTheDocument();
   });
 });

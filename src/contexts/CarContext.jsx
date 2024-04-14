@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useMemo, useCallback } from "react";
-
+import React from 'react';
 import PropTypes from 'prop-types';
 import axios from "axios";
 import api from "../lib/api/api";
@@ -34,7 +34,6 @@ function Provider({ children }) {
       .finally(() => setIsLoading(false));
   }, []);
 
-  console.log(modelData)
   useEffect(() => {
     fetchData();
 

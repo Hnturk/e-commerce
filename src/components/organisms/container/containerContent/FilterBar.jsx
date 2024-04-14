@@ -1,11 +1,12 @@
 import React from "react";
-import BrandFilter from "../../../molecules/BrandFilter";
-import SortFilter from "../../../molecules/SortFilter";
-import ModelFilter from "../../../molecules/ModelFilter";
+import BrandFilter from "../../../molecules/BrandFilter.jsx";
+import SortFilter from "../../../molecules/SortFilter.jsx";
+import ModelFilter from "../../../molecules/ModelFilter.jsx";
 import Grid from "@mui/material/Unstable_Grid2";
 function FilterBar() {
   return (
     <Grid
+      data-testid="filter-bar"
       container
       sx={{
         display: "flex",

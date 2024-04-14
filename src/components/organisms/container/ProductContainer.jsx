@@ -1,9 +1,10 @@
-import { React,  useContext } from "react";
+import {  useContext } from "react";
+import React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import ProductDetail from "./containerProduct/ProductDetail";
-import ShopBar from "./containerContent/ShopBar";
-import CarContext from "../../../contexts/CarContext";
-import OpenCart from "../../molecules/OpenCart";
+import ProductDetail from "./containerProduct/ProductDetail.jsx";
+import ShopBar from "./containerContent/ShopBar.jsx";
+import CarContext from "../../../contexts/CarContext.jsx";
+import OpenCart from "../../molecules/OpenCart.jsx";
 
 function ProductContainer() {
 
@@ -11,6 +12,7 @@ function ProductContainer() {
 
   return (
     <Grid
+      data-testid = "product-container"
       sx={{
         height: "calc(100vh - 77px)",
         display: "flex",

@@ -1,7 +1,7 @@
 import React from "react";
-import SearchBar from "../../atoms/SearchBar";
-import Account from "../../atoms/Account";
-import Wallet from "../../atoms/Wallet";
+import SearchBar from "../../atoms/SearchBar.jsx";
+import Account from "../../atoms/Account.jsx";
+import Wallet from "../../atoms/Wallet.jsx";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import Link from "@mui/material/Link";
@@ -26,6 +26,7 @@ function NavbarC() {
 
   return (
     <Grid
+      data-testid="navbar"
       container
       style={{
         maxWidth: "100%",
@@ -162,12 +163,17 @@ function NavbarC() {
               onClick={handleClose}
             >
               {" "}
-              <AccountCircle sx={{ marginRight: "10px" }} color="primary" />
+              <AccountCircle
+                
+                sx={{ marginRight: "10px" }}
+                color="primary"
+              />
               Profile
             </MenuItem>
             <MenuItem sx={{ height: "50px" }} onClick={handleClose}>
               {" "}
               <AccountBalanceWalletOutlinedIcon
+                data-testid="wallet-icon"
                 sx={{ marginRight: "10px" }}
                 color="primary"
               />{" "}
@@ -184,4 +190,3 @@ function NavbarC() {
 }
 const Navbar = React.memo(NavbarC);
 export default Navbar;
-

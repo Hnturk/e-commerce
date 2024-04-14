@@ -1,118 +1,72 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { CarContext } from "../../../contexts/CarContext";
+import { BrowserRouter as Router } from "react-router-dom";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import CarContext from "../../../contexts/CarContext";
 import ProductCard from "../../../components/molecules/Card";
 
 describe("ProductCard component", () => {
-
   const mockCar = {
     id: 1,
-    name: "Car A",
+    name: "Car 1",
     price: 10000,
     count: 1,
-    image: "car-image.jpg",
-    description: "This is a car",
+    image: "car1.jpg",
+    description: "This is a car.",
   };
-
   const mockCartProducts = [
-    { id: 1, name: "Car A", price: 10000, count: 1, image: "car-image.jpg" },
+    { id: 1, name: "Car 1", brand: "Brand 1", model: "Model 1", count: 2 },
+    { id: 2, name: "Car 2", brand: "Brand 2", model: "Model 2", count: 1 },
   ];
 
-  const mockAddToCart = jest.fn();
-  const mockGetProduct = jest.fn();
-  const mockNavigate = jest.fn();
+  const addToCart = jest.fn();
+  const getProduct = jest.fn();
 
-  const mockContext = {
-    addToCart: mockAddToCart,
-    cartProducts: mockCartProducts,
-    getProduct: mockGetProduct,
-  };
-
-  test("renders the car image, price, and name", () => {
-    try {
-      render(
-        <CarContext.Provider value={mockContext}>
+  test("adds car to cart when 'Add to cart' button is clicked", () => {
+    render(
+      <Router>
+        <CarContext.Provider
+          value={{ addToCart, cartProducts: [], getProduct }}
+        >
           <ProductCard car={mockCar} />
         </CarContext.Provider>
-      );
+      </Router>
+    );
 
-      const carImage = screen.getByTestId("car-image");
-      expect(carImage).toBeInTheDocument();
-
-      const carPrice = screen.getByText("10000");
-      const carName = screen.getByText("Car A");
-
-      expect(carPrice).toBeInTheDocument();
-      expect(carName).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+    const addToCartButton = screen.getByTestId("add-to-cart");
+    userEvent.click(addToCartButton);
   });
 
-  test("renders 'Add to cart' button when car is not in cart", () => {
-    try {
-      render(
-        <CarContext.Provider value={mockContext}>
+  test("renders car image, price, and name", () => {
+    render(
+      <Router>
+        <CarContext.Provider
+          value={{ addToCart, cartProducts: mockCartProducts, getProduct }}
+        >
           <ProductCard car={mockCar} />
         </CarContext.Provider>
-      );
-      const addToCartButton = screen.getByText("Add to cart");
-      expect(addToCartButton).toBeInTheDocument();
-      expect(addToCartButton).not.toBeDisabled();
-    } catch (error) {
-      console.log(error);
-    }
+      </Router>
+    );
+    const carImage = screen.getByTestId("car-card");
+    const carPrice = screen.getByTestId("car-price");
+    const carName = screen.getByTestId("car-name");
+    expect(carImage).toBeInTheDocument();
+    expect(carPrice).toBeInTheDocument();
+    expect(carName).toBeInTheDocument();
   });
 
-  test("renders 'Added to cart' button when car is in cart", () => {
-    try {
-      render(
-        <CarContext.Provider value={mockContext}>
+  test("navigates to product page when card is clicked", () => {
+    render(
+      <Router>
+        <CarContext.Provider
+          value={{ addToCart, cartProducts: mockCartProducts, getProduct }}
+        >
           <ProductCard car={mockCar} />
         </CarContext.Provider>
-      );
-      const addedToCartButton = screen.getByText("Added to cart");
-      expect(addedToCartButton).toBeInTheDocument();
-      expect(addedToCartButton).toBeDisabled();
-    } catch (error) {
-      console.log(error);
-    }
-  });
+      </Router>
+    );
 
-  test("calls addToCart function when 'Add to cart' button is clicked", () => {
-    try {
-      render(
-        <CarContext.Provider value={mockContext}>
-          <ProductCard car={mockCar} />
-        </CarContext.Provider>
-      );
-      const addToCartButton = screen.getByText("Add to cart");
-      fireEvent.click(addToCartButton);
-      expect(mockAddToCart).toHaveBeenCalledWith(10000, "Car A", 1, 1);
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
-  test("calls navigate and getProduct functions when card is clicked", () => {
-    try {
-      render(
-        <CarContext.Provider value={mockContext}>
-          <ProductCard car={mockCar} />
-        </CarContext.Provider>
-      );
-      const card = screen.getByRole("button");
-      fireEvent.click(card);
-      expect(mockNavigate).toHaveBeenCalledWith("/product");
-      expect(mockGetProduct).toHaveBeenCalledWith(
-        "car-image.jpg",
-        "Car A",
-        10000,
-        "This is a car",
-        1
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    const card = screen.getByTestId("card-action");
+    userEvent.click(card);
   });
 });

@@ -1,4 +1,5 @@
-import { React, useContext } from "react";
+import { useContext } from "react";
+import React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -61,6 +62,7 @@ export default function CartItem({ item }) {
         secondaryAction={
           <IconButton disableRipple edge="end" sx={{ display: "flex", gap: 1 }}>
             <Button
+              data-testid = "decrease-button"
               variant="string"
               sx={{ minWidth: 25, height: 25, padding: 0 }}
               onClick={() => handleDecrease(item.id)}
@@ -70,6 +72,7 @@ export default function CartItem({ item }) {
             </Button>
             {item?.count}
             <Button
+              data-testid  = "increase-button"
               variant="string"
               sx={{ minWidth: 25, height: 25, padding: 0 }}
               onClick={() => handleIncrease(item.id)}

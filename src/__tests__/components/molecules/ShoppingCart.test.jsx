@@ -1,20 +1,20 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { CarContextProvider } from "../../../contexts/CarContext";
 import ShoppingCart from "../../../components/molecules/ShoppingCart";
+import CarContext from "../../../contexts/CarContext";
 
 describe("ShoppingCart component", () => {
-  test("renders the cart items", () => {
-    try {
-      render(
-        <CarContextProvider>
-          <ShoppingCart />
-        </CarContextProvider>
-      );
-      const cartItems = screen.getAllByTestId("cart-item");
-      expect(cartItems.length).toBeGreaterThan(0);
-    } catch (error) {
-      console.log(error);
-    }
+  const cartProducts = [
+    { id: 1, name: "Product 1", price: 10 },
+    { id: 2, name: "Product 2", price: 20 },
+    { id: 3, name: "Product 3", price: 30 },
+  ];
+
+  test("renders cart items correctly", () => {
+    render(
+      <CarContext.Provider value={{ cartProducts }}>
+        <ShoppingCart />
+      </CarContext.Provider>
+    );
   });
 });

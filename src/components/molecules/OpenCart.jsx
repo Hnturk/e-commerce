@@ -1,4 +1,5 @@
-import {React, useContext, useState} from 'react'
+import React from 'react';
+import { useContext, useState} from 'react'
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import Paper from "@mui/material/Paper";
@@ -7,8 +8,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import CarContext from "../../contexts/CarContext";
-import CartItem from '../atoms/CartItem';
+import CarContext from "../../contexts/CarContext.jsx";
+import CartItem from '../atoms/CartItem.jsx';
 
 function OpenCart() {
     
@@ -22,6 +23,7 @@ const cartDrawer = (newOpen) => () => {
 
   return (
     <Paper
+    data-testid = "open-cart"
     className="shoppingCart"
     elevation={4}
     sx={{
@@ -47,7 +49,7 @@ const cartDrawer = (newOpen) => () => {
     >
       <ShoppingCartIcon sx={{ marginRight: "5px" }} /> Open Cart
     </Button>
-    <Drawer anchor="bottom" open={cartOpen} onClose={cartDrawer(false)}>
+    <Drawer data-testid = "cart-drawer" anchor="bottom" open={cartOpen} onClose={cartDrawer(false)}>
       <Box
         sx={{
           width: "100%",
@@ -91,6 +93,7 @@ const cartDrawer = (newOpen) => () => {
         >
           <Typography
             variant="h6"
+            data-testid = "open-cart-total-price"
             gutterBottom
             sx={{ marginLeft: "10px" }}
           >

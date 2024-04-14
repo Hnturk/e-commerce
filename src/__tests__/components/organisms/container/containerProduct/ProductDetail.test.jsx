@@ -1,97 +1,65 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import { CarContext } from "../../../../../contexts/CarContext";
 import ProductDetail from "../../../../../components/organisms/container/containerProduct/ProductDetail";
 
 describe("ProductDetail component", () => {
-  test("renders the product name", () => {
-    try {
-      const car = {
-        id: 1,
-        name: "Audi A4",
-        price: "$50,000",
-        description: "Lorem ipsum dolor sit amet",
-        image: "audi-a4.jpg",
-      };
-      render(<ProductDetail car={car} />);
-      const productName = screen.getByText("Audi A4");
-      expect(productName).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+  const mockCar = {
+    id: 1,
+    name: "Car 1",
+    brand: "Brand 1",
+    model: "Model 1",
+    description: "Description 1",
+    price: 100,
+    image: "image1.jpg",
+  };
+
+  const mockCartProducts = [
+    { id: 1, name: "Car 1", brand: "Brand 1", model: "Model 1", count: 2 },
+    { id: 2, name: "Car 2", brand: "Brand 2", model: "Model 2", count: 1 },
+  ];
+  const mockAddToCart = jest.fn();
+  test("renders product details correctly", () => {
+    render(
+      <CarContext.Provider value={{ cartProducts: mockCartProducts, addToCart: mockAddToCart }}>
+        <ProductDetail car={mockCar} />
+      </CarContext.Provider>
+    );
+
+    const productName = screen.getByText("Car 1");
+    const productPrice = screen.getByText("100");
+    const productDescription = screen.getByText("Description 1");
+
+    expect(productName).toBeInTheDocument();
+    expect(productPrice).toBeInTheDocument();
+    expect(productDescription).toBeInTheDocument();
   });
 
-  test("renders the product price", () => {
-    try {
-      const car = {
-        id: 1,
-        name: "Audi A4",
-        price: "$50,000",
-        description: "Lorem ipsum dolor sit amet",
-        image: "audi-a4.jpg",
-      };
-      render(<ProductDetail car={car} />);
-      const productPrice = screen.getByText("$50,000");
-      expect(productPrice).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+  test("renders 'Add to cart' button when car is not in cart", () => {
+    render(
+      <CarContext.Provider value={{ cartProducts: mockCartProducts, addToCart: mockAddToCart }}>
+        <ProductDetail car={mockCar} />
+      </CarContext.Provider>
+    );
+
+    const addToCartButton = screen.getByTestId("add-to-cart");
+    expect(addToCartButton).toBeInTheDocument();
   });
 
-  test("renders the product description", () => {
-    try {
-      const car = {
-        id: 1,
-        name: "Audi A4",
-        price: "$50,000",
-        description: "Lorem ipsum dolor sit amet",
-        image: "audi-a4.jpg",
-      };
-      render(<ProductDetail car={car} />);
-      const productDescription = screen.getByText("Lorem ipsum dolor sit amet");
-      expect(productDescription).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  test("renders 'Added to cart' button when car is already in cart", () => {
+    render(
+      <CarContext.Provider
+        value={{
+          cartProducts: [...mockCartProducts, { id: 1, name: "Car 1", brand: "Brand 1", model: "Model 1", count: 1 }],
+          addToCart: mockAddToCart
+        }}
+      >
+        <ProductDetail car={mockCar} />
+      </CarContext.Provider>
+    );
 
-  test("adds the product to cart on button click", () => {
-    try {
-      const car = {
-        id: 1,
-        name: "Audi A4",
-        price: "$50,000",
-        description: "Lorem ipsum dolor sit amet",
-        image: "audi-a4.jpg",
-      };
-      const addToCart = jest.fn();
-      render(<ProductDetail car={car} addToCart={addToCart} />);
-      const addToCartButton = screen.getByText("Add to cart");
-      fireEvent.click(addToCartButton);
-      expect(addToCart).toHaveBeenCalledTimes(1);
-      expect(addToCart).toHaveBeenCalledWith("$50,000", "Audi A4", undefined, 1);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+    const addedToCartButton = screen.getByText("Added to cart");
 
-  test("displays 'Added to cart' when product is already in cart", () => {
-    try {
-      const car = {
-        id: 1,
-        name: "Audi A4",
-        price: "$50,000",
-        description: "Lorem ipsum dolor sit amet",
-        image: "audi-a4.jpg",
-      };
-      const addToCart = jest.fn();
-      const cartProducts = [{ id: 1 }];
-      render(
-        <ProductDetail car={car} addToCart={addToCart} cartProducts={cartProducts} />
-      );
-      const addedToCartText = screen.getByText("Added to cart");
-      expect(addedToCartText).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+    expect(addedToCartButton).toBeInTheDocument();
   });
 });

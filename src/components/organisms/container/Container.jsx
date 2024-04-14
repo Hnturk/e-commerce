@@ -1,16 +1,19 @@
-import { React, useContext } from "react";
+import { useContext } from "react";
+import React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import FilterBar from "./containerContent/FilterBar";
-import MainContent from "./containerContent/MainContent";
-import ShopBar from "./containerContent/ShopBar";
+import FilterBar from "./containerContent/FilterBar.jsx";
+import MainContent from "./containerContent/MainContent.jsx";
+import ShopBar from "./containerContent/ShopBar.jsx";
 import "../../../style/components/molecules/Card-min.css";
-import CarContext from "../../../contexts/CarContext";
+import CarContext from "../../../contexts/CarContext.jsx";
 
 function Container() {
   const { isLoading } = useContext(CarContext);
 
   return (
-    <Grid sx={{ height: "calc(100vh - 77px)" }} container>
+    <Grid sx={{ height: "calc(100vh - 77px)" }} 
+      container 
+      data-testid="container">
       <Grid
         sx={{ display: { md: "flex", xs: "none" }, padding: 0 }}
         xs={0}

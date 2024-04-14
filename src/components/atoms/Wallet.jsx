@@ -1,8 +1,9 @@
-import {React, useContext} from "react";
+import { useContext } from "react";
+import React  from 'react';
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import CarContext from "../../contexts/CarContext";
+import CarContext from "../../contexts/CarContext.jsx";
 
 function Wallet() {
 

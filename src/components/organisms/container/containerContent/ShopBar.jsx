@@ -1,10 +1,11 @@
 import React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import ShoppingCart from "../../../molecules/ShoppingCart";
-import Checkout from "../../../molecules/Checkout";
+import ShoppingCart from "../../../molecules/ShoppingCart.jsx";
+import Checkout from "../../../molecules/Checkout.jsx";
 function ShopBar() {
   return (
     <Grid
+      data-testid = "shop-bar"
       className="mobilCheckout"
       container
       spacing={2}
