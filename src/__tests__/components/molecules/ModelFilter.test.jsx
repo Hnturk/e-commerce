@@ -5,6 +5,24 @@ import CarContext from "../../../contexts/CarContext";
 
 describe("ModelFilter component", () => {
   const setCarData = jest.fn();
+  const carData = [
+    {
+      name: "lamborgini",
+      model: "sedan",
+      brand: "lamborgini",
+      description: "description",
+      price: 1000000,
+      image: "image",
+    },
+    {
+      name: "lamborgini",
+      model: "suv",
+      brand: "lamborgini",
+      description: "description",
+      price: 1000000,
+      image: "image",
+    },
+  ];
   const data = [
     {
       name: "lamborgini",
@@ -28,7 +46,9 @@ describe("ModelFilter component", () => {
   const selectedModels = new Set();
   test("renders search input", () => {
     render(
-      <CarContext.Provider value={{ setCarData, data, modelData, selected, selectedModels }}>
+      <CarContext.Provider
+        value={{ setCarData, data, modelData, selected, selectedModels, carData }}
+      >
         <ModelFilter />
       </CarContext.Provider>
     );
@@ -38,7 +58,9 @@ describe("ModelFilter component", () => {
 
   test("filters models based on search input", () => {
     render(
-      <CarContext.Provider value={{ setCarData, data, modelData, selected, selectedModels }}>
+      <CarContext.Provider
+        value={{ setCarData, data, modelData, selected, selectedModels, carData }}
+      >
         <ModelFilter />
       </CarContext.Provider>
     );
@@ -51,15 +73,15 @@ describe("ModelFilter component", () => {
   test("updates selected models when checkboxes are clicked", () => {
     render(
       <CarContext.Provider
-        value={{ setCarData, data, modelData, selected, selectedModels }}
+        value={{ setCarData, data, modelData, selected, selectedModels, carData }}
       >
         <ModelFilter />
       </CarContext.Provider>
     );
-  
+
     const modelCheckbox = screen.getAllByTestId("model-checkbox");
     fireEvent.click(modelCheckbox[0]);
-  
+
     expect(setCarData).toHaveBeenCalledTimes(2);
     expect(selectedModels.has("sedan")).toBe(true);
   });

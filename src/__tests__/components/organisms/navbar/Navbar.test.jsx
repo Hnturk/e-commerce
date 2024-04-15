@@ -1,19 +1,21 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Navbar from "../../../../components/organisms/navbar/Navbar";
 import CarContext from "../../../../contexts/CarContext";
 
 describe("Navbar component", () => {
-
   const mockCarData = [
     { name: "Car 1", brand: "Brand 1", model: "Model 1" },
-    { name: "Car 2", brand: "Brand 2", model: "Model 2" },] 
+    { name: "Car 2", brand: "Brand 2", model: "Model 2" },
+  ];
 
   const setCarData = jest.fn();
   const setAnchorEl = jest.fn();
   test("renders logo", () => {
     render(
-      <CarContext.Provider value={{ carData: mockCarData, setCarData, setAnchorEl }}>
+      <CarContext.Provider
+        value={{ carData: mockCarData, setCarData, setAnchorEl }}
+      >
         <Navbar />
       </CarContext.Provider>
     );
@@ -23,7 +25,9 @@ describe("Navbar component", () => {
 
   test("renders search bar", () => {
     render(
-      <CarContext.Provider value={{ carData: mockCarData, setCarData, setAnchorEl }}>
+      <CarContext.Provider
+        value={{ carData: mockCarData, setCarData, setAnchorEl }}
+      >
         <Navbar />
       </CarContext.Provider>
     );
@@ -32,8 +36,10 @@ describe("Navbar component", () => {
   });
 
   test("renders account icon", () => {
-        render(
-      <CarContext.Provider value={{ carData: mockCarData, setCarData, setAnchorEl }}>
+    render(
+      <CarContext.Provider
+        value={{ carData: mockCarData, setCarData, setAnchorEl }}
+      >
         <Navbar />
       </CarContext.Provider>
     );
@@ -42,12 +48,48 @@ describe("Navbar component", () => {
   });
 
   test("renders wallet icon", () => {
-        render(
-      <CarContext.Provider value={{ carData: mockCarData, setCarData, setAnchorEl }}>
+    render(
+      <CarContext.Provider
+        value={{ carData: mockCarData, setCarData, setAnchorEl }}
+      >
         <Navbar />
       </CarContext.Provider>
     );
     const walletIconElement = screen.getByTestId("wallet-icon");
     expect(walletIconElement).toBeInTheDocument();
   });
+
+  test("Opens menu when handleClick is called", () => {
+    render(
+      <CarContext.Provider
+        value={{ carData: mockCarData, setCarData, setAnchorEl }}
+      >
+        <Navbar />
+      </CarContext.Provider>
+    );
+
+    const menuButton = screen.getByTestId("menu-button");
+    expect(menuButton).toBeInTheDocument();
+    fireEvent.click(menuButton);
+    const menuList = screen.getByTestId("menu");
+    expect(menuList).toBeVisible();
+  });
+
+  test("Closes menu when handleClose is called", () => {
+    render(
+      <CarContext.Provider
+        value={{ carData: mockCarData, setCarData, setAnchorEl }}
+      >
+        <Navbar />
+      </CarContext.Provider>
+    );
+
+    const menuButton = screen.getByTestId("menu-button");
+    expect(menuButton).toBeInTheDocument();
+    fireEvent.click(menuButton);
+    const menuList = screen.getByTestId("menu");
+    const menuItem = screen.getByTestId("menu-item");
+    fireEvent.click(menuItem);
+    expect(menuList).not.toBeVisible(); // TODO fix this test
+  }); 
 });

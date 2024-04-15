@@ -128,6 +128,7 @@ function NavbarC() {
                 xl: "0px",
               },
             }}
+            data-testid="menu-button"
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"
@@ -150,6 +151,7 @@ function NavbarC() {
             />
           </Button>
           <Menu
+            data-testid="menu"
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
@@ -159,15 +161,12 @@ function NavbarC() {
             }}
           >
             <MenuItem
+              data-testid="menu-item"
               sx={{ height: "50px", width: "120px" }}
               onClick={handleClose}
             >
               {" "}
-              <AccountCircle
-                
-                sx={{ marginRight: "10px" }}
-                color="primary"
-              />
+              <AccountCircle sx={{ marginRight: "10px" }} color="primary" />
               Profile
             </MenuItem>
             <MenuItem sx={{ height: "50px" }} onClick={handleClose}>
