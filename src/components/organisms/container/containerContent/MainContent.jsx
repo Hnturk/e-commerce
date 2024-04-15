@@ -42,7 +42,7 @@ function MainContent() {
 
 
 return(
-<div data-testid="main-content" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "20px" }}>
+<div data-testid="main-content" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "20px", width: "100%"}}>
 <Paper
   sx={{
     display: isLoading ? "none" : { md: "none", xs: "flex" },

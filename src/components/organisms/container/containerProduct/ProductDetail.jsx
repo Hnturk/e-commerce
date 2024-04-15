@@ -29,10 +29,10 @@ function ProductDetail({ car }) {
       raised={true}
       sx={{
         minWidth: "185px",
-        width: { xs: "80%", sm: "500px", md: "500px", lg: "90%", xl: "90%" },
+        width: { xs: "80%", sm: "65%", md: "70%", lg: "90%", xl: "90%" },
         maxWidth: "900px",
         height: { xs: "90%", sm: "80%", md: "80%", lg: "70%", xl: "70%" },
-        maxHeight: "770px",
+        maxHeight: "48rem",
         padding: "10px",
         display: "flex",
         flexDirection: {
@@ -123,11 +123,11 @@ function ProductDetail({ car }) {
             sx={{
               overflowY: "auto",
               maxHeight: {
-                xs: "196px",
-                sm: "155px",
-                md: "155px",
-                lg: "540px",
-                xl: "540px",
+                xs: "70%",
+                sm: "70%",
+                md: "70%",
+                lg: "90%",
+                xl: "90%",
               },
               fontSize: {
                 xs: "15px",
@@ -153,20 +153,8 @@ function ProductDetail({ car }) {
             data-testid = "add-to-cart"
             className={isClicked ? "" : "button"}
             sx={{
-              width: {
-                xs: "300px",
-                sm: "400px",
-                md: "400px",
-                lg: "370px",
-                xl: "370px",
-              },
-              height: {
-                xs: "30px",
-                sm: "40px",
-                md: "40px",
-                lg: "60px",
-                xl: "60px",
-              },
+              width: "80%",
+              height: "80%"
             }}
             size="medium"
             disabled={isClicked}

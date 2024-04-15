@@ -6,17 +6,17 @@ import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import CarContext from "../../contexts/CarContext";
-
+// filter by model 
 function ModelFilter() {
 
-  const { setCarData, data, modelData, selected } =
+  const { setCarData, data, modelData, selected, carData } =
     useContext(CarContext);
   const [query, setQuery] = useState("");
   const [selectedModels, setSelectedModels] = useState(new Set());
 
   useEffect(() => {
     if (selectedModels.size > 0) {
-      const filteredCarData = data.filter((car) =>
+      const filteredCarData = carData.filter((car) =>
         selectedModels.has(car.model)
       );
       setCarData(filteredCarData);
@@ -27,7 +27,7 @@ function ModelFilter() {
       setCarData(data);
     }
   }, [selected, selectedModels]);
-  console.log(selectedModels)
+
   function handleModelSelection(model) {
     selectedModels.has(model)
       ? selectedModels.delete(model)

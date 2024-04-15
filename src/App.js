@@ -7,10 +7,6 @@ import ProductCard from "./pages/ProductCard.jsx";
 
 function App() {
 
-  const { fetchData } = useContext(CarContext);
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <BrowserRouter>
