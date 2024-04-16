@@ -12,8 +12,6 @@ export default function SearchBar() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [search, setSearch] = useState("");
 
-
-
   useEffect(() => {
     search
       ? setCarData(
@@ -24,7 +22,7 @@ export default function SearchBar() {
 
   return (
     <Paper
-      data-testid = "search-bar"
+      data-testid="search-bar"
       onMouseEnter={handleMouse}
       onMouseLeave={handleMouse}
       elevation={1}

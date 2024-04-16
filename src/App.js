@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CarContext from "./contexts/CarContext.jsx";
 import Main from "./pages/Main.jsx";
 import ProductCard from "./pages/ProductCard.jsx";
 

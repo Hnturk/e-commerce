@@ -66,7 +66,7 @@ export default function CartItem({ item }) {
               variant="string"
               sx={{ minWidth: 25, height: 25, padding: 0 }}
               onClick={() => handleDecrease(item.id)}
-              disabled={item?.count === 0}
+              
             >
               <RemoveCircleOutlineRoundedIcon color="primary" />
             </Button>
