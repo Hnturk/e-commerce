@@ -9,7 +9,7 @@ import CarContext from "../../contexts/CarContext.jsx";
 import { v4 as uuidv4 } from "uuid";
 
 export default function BrandFilter() {
-  const { brandData, setCarData, data, setModelData, selected, setSelected } =
+  const { brandData, selectedBrands, setSelectedBrands } =
     useContext(CarContext);
   const [query, setQuery] = useState("");
 
@@ -17,39 +17,19 @@ export default function BrandFilter() {
     if (query) {
       return brandData
         ? Array.from(brandData).filter((brand) =>
-            brand.toLowerCase().includes(query.toLowerCase())
+            brand.toLowerCase().includes(query.toLowerCase().trim())
           )
         : [];
     }
     return brandData ? Array.from(brandData) : [];
   }, [brandData, query]);
 
-  useEffect(() => {
-    filterData();
-  }, [selected]);
-
-  const filterData = () => {
-    if (selected && selected.size > 0) {
-      const filteredCarData = data.filter((car) => selected.has(car.brand));
-      setCarData(filteredCarData);
-      const filteredModels = Array.from(
-        new Set(filteredCarData.map((car) => car.model))
-      );
-      setModelData(filteredModels);
-    } else {
-      setCarData(data);
-      const originalModels = Array.from(new Set(data?.map((car) => car.model)));
-      setModelData(originalModels);
-    }
-  };
-
   const handleBrandSelection = (brand) => {
-    const updatedSelected = new Set(selected);
-    updatedSelected.has(brand)
-      ? updatedSelected.delete(brand)
-      : updatedSelected.add(brand);
-    setSelected(updatedSelected);
-    filterData();
+    const updatedSelectedBrands = new Set(selectedBrands);
+    updatedSelectedBrands.has(brand)
+      ? updatedSelectedBrands.delete(brand)
+      : updatedSelectedBrands.add(brand);
+    setSelectedBrands(updatedSelectedBrands);
   };
 
   const handleBrandSearch = (event) => {
@@ -76,7 +56,7 @@ export default function BrandFilter() {
             control={
               <Checkbox
                 onChange={() => handleBrandSelection(brand)}
-                checked={selected.has(brand)}
+                checked={selectedBrands.has(brand)}
               />
             }
             value={brand}

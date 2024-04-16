@@ -15,7 +15,7 @@ describe("SortFilter component", () => {
     expect(sortFilterComponent).toBeInTheDocument();
   });
 
-  test("changes selected value and sorts car data correctly", () => {
+  test("changes selectedBrands value and sorts car data correctly", () => {
     const carData = [
       { createdAt: "2022-01-01", price: "10000" },
       { createdAt: "2021-01-01", price: "20000" },
@@ -34,7 +34,7 @@ describe("SortFilter component", () => {
     fireEvent.click(radioButtons[0]);
 
     expect(setCarDataMock).toHaveBeenCalledWith([
-      { createdAt: "2021-01-01", price: "20000"  },
+      { createdAt: "2021-01-01", price: "20000" },
       { createdAt: "2022-01-01", price: "10000" },
       { createdAt: "2023-01-01", price: "15000" },
     ]);
@@ -47,9 +47,8 @@ describe("SortFilter component", () => {
       { createdAt: "2021-01-01", price: "20000" },
     ]);
 
-
     fireEvent.click(radioButtons[2]);
-  
+
     expect(setCarDataMock).toHaveBeenCalledWith([
       { createdAt: "2021-01-01", price: "20000" },
       { createdAt: "2023-01-01", price: "15000" },
@@ -57,7 +56,7 @@ describe("SortFilter component", () => {
     ]);
 
     fireEvent.click(radioButtons[3]);
-  
+
     expect(setCarDataMock).toHaveBeenCalledWith([
       { createdAt: "2022-01-01", price: "10000" },
       { createdAt: "2023-01-01", price: "15000" },

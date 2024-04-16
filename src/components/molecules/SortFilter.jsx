@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import React from 'react';
+import { useContext } from "react";
+import React from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -15,54 +15,32 @@ const options = [
   { label: "Price low to high", value: "lowToHigh" },
 ];
 export default function SortFilter() {
+  const { setSelectedValue, selectedValue } = useContext(CarContext);
 
-  const { carData, setCarData } = useContext(CarContext)
-  const [selectedValue, setSelectedValue] = useState("")
-
-  function handleClick(value){
+  function handleClick(value) {
     setSelectedValue(value);
-
-    let sortedData = [];
-    switch (value) {
-      case "oldToNew":
-        sortedData = [...carData].sort(
-          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-        );
-        break;
-      case "newToOld":
-        sortedData = [...carData].sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        );
-        break;
-      case "highToLow":
-        sortedData = [...carData].sort(
-          (a, b) => parseFloat(b.price) - parseFloat(a.price)
-        );
-        break;
-      case "lowToHigh":
-        sortedData = [...carData].sort(
-          (a, b) => parseFloat(a.price) - parseFloat(b.price)
-        );
-        break;
-      default:
-        break;
-    }
-    setCarData(sortedData);
-  } 
+  }
 
   return (
-    <Paper data-testid="sort-filter" sx={{ minWidth: "190px", width: "50%", height: "200px" }}>
+    <Paper
+      data-testid="sort-filter"
+      sx={{ minWidth: "190px", width: "50%", height: "200px" }}
+    >
       <FormControl sx={{ paddingLeft: "10px" }}>
         <FormLabel id="BrandFilter">Sort</FormLabel>
         <RadioGroup>
           {options.map((option) => (
-            <FormControlLabel 
-              key={option.value} 
+            <FormControlLabel
+              key={option.value}
               value={option.value}
-              control={<Radio 
-                checked={option.value === selectedValue}
-                onChange={() => handleClick(option.value)} />}
-              label={option.label} />
+              control={
+                <Radio
+                  checked={option.value === selectedValue}
+                  onChange={() => handleClick(option.value)}
+                />
+              }
+              label={option.label}
+            />
           ))}
         </RadioGroup>
       </FormControl>

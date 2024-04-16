@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import React from "react";
 import Card from "../../../../components/molecules/Card.jsx";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -23,11 +23,6 @@ function MainContent() {
 
   const itemsPerPage = 12;
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-  const currentItems = carData?.slice(indexOfFirstItem, indexOfLastItem);
-
   function handleChange(event, value) {
     setCurrentPage(value);
   }
@@ -40,6 +35,18 @@ function MainContent() {
     setFilterOpen(newOpen);
   };
 
+  useEffect(() => {
+    if (
+      currentPage !== 1 &&
+      currentPage > Math.ceil(carData?.length / itemsPerPage)
+    ) {
+      setCurrentPage(Math.ceil(carData?.length / itemsPerPage));
+    }
+  }, [currentPage, carData?.length]);
+  const currentItems = carData?.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
   return (
     <div
       data-testid="main-content"
@@ -138,26 +145,32 @@ function MainContent() {
           ))}
         </Grid>
       )}
-      <Paper
-        elevation={4}
-        sx={{
-          display: isLoading ? "none" : "flex",
-          height: "40px",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Stack spacing={2}>
-          <Pagination
-            data-testid="pagination"
-            color="primary"
-            count={Math.ceil(carData?.length / itemsPerPage)}
-            page={currentPage}
-            onChange={handleChange}
-            disabled={isLoading}
-          />
-        </Stack>
-      </Paper>
+      {currentItems.length !== 0 ? (
+        <Paper
+          elevation={4}
+          sx={{
+            display: isLoading ? "none" : "flex",
+            height: "40px",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Stack spacing={2}>
+            <Pagination
+              data-testid="pagination"
+              color="primary"
+              count={Math.ceil(carData?.length / itemsPerPage)}
+              page={currentPage}
+              onChange={handleChange}
+              disabled={isLoading}
+            />
+          </Stack>
+        </Paper>
+      ) : (
+        <div style={{ display: isLoading ? "none" : "block" }}>
+          <h1>Product not found</h1>
+        </div>
+      )}
     </div>
   );
 }

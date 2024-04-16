@@ -42,12 +42,19 @@ describe("ModelFilter component", () => {
     },
   ];
   const modelData = ["sedan", "suv", "hatchback"];
-  const selected = new Set();
+  const selectedBrands = new Set();
   const selectedModels = new Set();
   test("renders search input", () => {
     render(
       <CarContext.Provider
-        value={{ setCarData, data, modelData, selected, selectedModels, carData }}
+        value={{
+          setCarData,
+          data,
+          modelData,
+          selectedBrands,
+          selectedModels,
+          carData,
+        }}
       >
         <ModelFilter />
       </CarContext.Provider>
@@ -59,7 +66,14 @@ describe("ModelFilter component", () => {
   test("filters models based on search input", () => {
     render(
       <CarContext.Provider
-        value={{ setCarData, data, modelData, selected, selectedModels, carData }}
+        value={{
+          setCarData,
+          data,
+          modelData,
+          selectedBrands,
+          selectedModels,
+          carData,
+        }}
       >
         <ModelFilter />
       </CarContext.Provider>
@@ -70,10 +84,17 @@ describe("ModelFilter component", () => {
     expect(modelCheckboxes.length).toBe(1);
   });
   // TODO TEST FAİL
-  test("updates selected models when checkboxes are clicked", () => {
+  test("updates selectedBrands models when checkboxes are clicked", () => {
     render(
       <CarContext.Provider
-        value={{ setCarData, data, modelData, selected, selectedModels, carData }}
+        value={{
+          setCarData,
+          data,
+          modelData,
+          selectedBrands,
+          selectedModels,
+          carData,
+        }}
       >
         <ModelFilter />
       </CarContext.Provider>

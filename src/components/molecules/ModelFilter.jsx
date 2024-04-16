@@ -7,26 +7,11 @@ import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import { v4 as uuidv4 } from "uuid";
 import CarContext from "../../contexts/CarContext";
-// filter by model
+
 function ModelFilter() {
-  const { setCarData, data, modelData, selected, carData } =
+  const { modelData, selectedModels, setSelectedModels } =
     useContext(CarContext);
   const [query, setQuery] = useState("");
-  const [selectedModels, setSelectedModels] = useState(new Set());
-
-  useEffect(() => {
-    if (selectedModels.size > 0) {
-      const filteredCarData = carData.filter((car) =>
-        selectedModels.has(car.model)
-      );
-      setCarData(filteredCarData);
-    } else if (selected.size !== 0 && selectedModels.size === 0) {
-      const filteredCarData = data.filter((car) => selected.has(car.brand));
-      setCarData(filteredCarData);
-    } else if (selected.size === 0 && selectedModels.size === 0) {
-      setCarData(data);
-    }
-  }, [selected, selectedModels]);
 
   function handleModelSelection(model) {
     selectedModels.has(model)
@@ -36,7 +21,7 @@ function ModelFilter() {
   }
 
   function handleModelSearch(event) {
-    setQuery(event.target.value.toLowerCase());
+    setQuery(event.target.value.toLowerCase().trim());
   }
 
   const filteredModels = query

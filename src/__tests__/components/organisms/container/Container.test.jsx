@@ -4,7 +4,6 @@ import Container from "../../../../components/organisms/container/Container";
 import CarContext from "../../../../contexts/CarContext";
 
 describe("Container component", () => {
-
   const mockCartProducts = [
     {
       id: 1,
@@ -35,7 +34,7 @@ describe("Container component", () => {
     },
   ];
 
-  const mockSelected = new Set(["brand1", "brand2", "brand3"]);
+  const mockselectedBrands = new Set(["brand1", "brand2", "brand3"]);
 
   const setCarData = jest.fn();
   const setModelData = jest.fn();
@@ -43,7 +42,7 @@ describe("Container component", () => {
   const mockCarContext = {
     isLoading: false,
     cartProducts: mockCartProducts,
-    selected: mockSelected,
+    selectedBrands: mockselectedBrands,
     data: mockData,
     setCarData,
     setModelData,

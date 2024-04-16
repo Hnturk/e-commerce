@@ -3,7 +3,25 @@ import BrandFilter from "../../../molecules/BrandFilter.jsx";
 import SortFilter from "../../../molecules/SortFilter.jsx";
 import ModelFilter from "../../../molecules/ModelFilter.jsx";
 import Grid from "@mui/material/Unstable_Grid2";
+import Button from "@mui/material/Button";
+import CarContext from "../../../../contexts/CarContext.jsx";
 function FilterBar() {
+  const {
+    carData,
+    data,
+    setCarData,
+    setSelectedModels,
+    setSelectedBrands,
+    setSelectedValue,
+    setQuery,
+  } = React.useContext(CarContext);
+  const handleClick = () => {
+    setCarData(data);
+    setQuery("");
+    setSelectedModels(new Set());
+    setSelectedBrands(new Set());
+    setSelectedValue("");
+  };
   return (
     <Grid
       data-testid="filter-bar"
@@ -32,6 +50,15 @@ function FilterBar() {
       <SortFilter />
       <BrandFilter />
       <ModelFilter />
+      {JSON.stringify(carData) !== JSON.stringify(data) ? (
+        <Button
+          sx={{ minWidth: "190px", width: "50%" }}
+          variant="contained"
+          onClick={handleClick}
+        >
+          Clear Filters
+        </Button>
+      ) : null}
     </Grid>
   );
 }

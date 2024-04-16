@@ -19,7 +19,7 @@ describe("FilterBar component", () => {
   const setCarData = jest.fn();
   const setModelData = jest.fn();
 
-  const mockSelected = new Set(["brand1", "brand2", "brand3"]);
+  const mockselectedBrands = new Set(["brand1", "brand2", "brand3"]);
 
   test("renders SortFilter component", () => {
     render(
@@ -28,7 +28,7 @@ describe("FilterBar component", () => {
           carData: mockCarData,
           setCarData,
           setModelData,
-          selected: mockSelected,
+          selectedBrands: mockselectedBrands,
           data: mockData,
         }}
       >
@@ -46,7 +46,7 @@ describe("FilterBar component", () => {
           carData: mockCarData,
           setCarData,
           setModelData,
-          selected: mockSelected,
+          selectedBrands: mockselectedBrands,
           data: mockData,
         }}
       >
@@ -64,7 +64,7 @@ describe("FilterBar component", () => {
           carData: mockCarData,
           setCarData,
           setModelData,
-          selected: mockSelected,
+          selectedBrands: mockselectedBrands,
           data: mockData,
         }}
       >
@@ -82,7 +82,7 @@ describe("FilterBar component", () => {
           carData: mockCarData,
           setCarData,
           setModelData,
-          selected: mockSelected,
+          selectedBrands: mockselectedBrands,
           data: mockData,
         }}
       >

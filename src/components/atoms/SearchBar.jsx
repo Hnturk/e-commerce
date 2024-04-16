@@ -1,24 +1,15 @@
 import Paper from "@mui/material/Paper";
 import React from "react";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import CarContext from "../../contexts/CarContext";
 
 export default function SearchBar() {
-  const { setCarData, data } = useContext(CarContext);
+  const { setQuery } = useContext(CarContext);
 
   const [isExpanded, setIsExpanded] = useState(false);
-  const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    search
-      ? setCarData(
-          data.filter((car) => car.name.toLowerCase().includes(search))
-        )
-      : setCarData(data);
-  }, [search, data, setCarData]);
 
   return (
     <Paper
@@ -54,6 +45,6 @@ export default function SearchBar() {
   }
 
   function handleSearch(event) {
-    setSearch(event.target.value.toLowerCase());
+    setQuery(event.target.value.toLowerCase().trim());
   }
 }

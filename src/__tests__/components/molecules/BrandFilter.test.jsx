@@ -12,8 +12,8 @@ describe("BrandFilter component", () => {
           setCarData: jest.fn(),
           data: [],
           setModelData: jest.fn(),
-          selected: new Set(),
-          setSelected: jest.fn(),
+          selectedBrands: new Set(),
+          setSelectedBrands: jest.fn(),
         }}
       >
         <BrandFilter />
@@ -35,8 +35,8 @@ describe("BrandFilter component", () => {
           setCarData: jest.fn(),
           data: [],
           setModelData: jest.fn(),
-          selected: new Set(),
-          setSelected: jest.fn(),
+          selectedBrands: new Set(),
+          setSelectedBrands: jest.fn(),
         }}
       >
         <BrandFilter />
@@ -51,10 +51,10 @@ describe("BrandFilter component", () => {
     expect(brandCheckboxes[0]).toHaveAttribute("value", "Brand 1");
   });
 
-  test("updates selected brands and filters data when brand checkbox is clicked", () => {
+  test("updates selectedBrands brands and filters data when brand checkbox is clicked", () => {
     const setCarData = jest.fn();
     const setModelData = jest.fn();
-    const setSelected = jest.fn();
+    const setSelectedBrands = jest.fn();
 
     render(
       <CarContext.Provider
@@ -63,8 +63,8 @@ describe("BrandFilter component", () => {
           setCarData,
           data: [{ brand: "Brand 1", model: "Model 1" }],
           setModelData,
-          selected: new Set(),
-          setSelected,
+          selectedBrands: new Set(),
+          setSelectedBrands,
         }}
       >
         <BrandFilter />
@@ -74,7 +74,7 @@ describe("BrandFilter component", () => {
     const brandCheckbox = screen.getByLabelText("Brand 1");
     fireEvent.click(brandCheckbox);
 
-    expect(setSelected).toHaveBeenCalledWith(new Set(["Brand 1"]));
+    expect(setSelectedBrands).toHaveBeenCalledWith(new Set(["Brand 1"]));
     expect(setCarData).toHaveBeenCalledWith([
       { brand: "Brand 1", model: "Model 1" },
     ]);

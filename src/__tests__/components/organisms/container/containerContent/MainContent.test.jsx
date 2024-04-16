@@ -15,7 +15,7 @@ describe("MainContent component", () => {
     { id: 2, name: "Car 2", brand: "Brand 2", model: "Model 2", count: 3 },
     { id: 3, name: "Car 3", brand: "Brand 3", model: "Model 3", count: 1 },
   ];
-  const mockSelected = new Set([]);
+  const mockselectedBrands = new Set([]);
   const mockSetCurrentPage = jest.fn();
   const mockSetCartOpen = jest.fn();
   const mockSetFilterOpen = jest.fn();
@@ -31,7 +31,7 @@ describe("MainContent component", () => {
     setFilterOpen: mockSetFilterOpen,
     setCarData: mockSetCarData,
     setModelData: mockSetModelData,
-    selected: mockSelected,
+    selectedBrands: mockselectedBrands,
   };
 
   test("Open Cart button click toggles the Cart drawer", () => {
